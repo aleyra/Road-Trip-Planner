@@ -6,12 +6,17 @@ import './../css/main.css';
 function MainContainer() {
 	return (
 		<React.Fragment>
-			<div className="main-div">
+			<div className="main-header">
 				<h1>Road Trip Planner</h1>
 				<p>page header TODO</p>
 			</div>
-			<div>
-				
+			<div className="main-body">
+				<div className="main-map">
+					<p>map TODO</p>
+				</div>
+				<div className="main-step">
+					<p>step TODO</p>
+				</div>
 			</div>
 		</React.Fragment>
 	);
