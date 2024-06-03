@@ -3,6 +3,9 @@ import React from "react";
 //css
 import './../css/main.css';
 
+//functions
+import MyMapContainer from "./MapContainer";
+
 function MainContainer() {
 	return (
 		<React.Fragment>
@@ -12,7 +15,7 @@ function MainContainer() {
 			</div>
 			<div className="main-body">
 				<div className="main-map">
-					<p>map TODO</p>
+					<MyMapContainer />
 				</div>
 				<div className="main-step">
 					<p>step TODO</p>

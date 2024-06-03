@@ -52,7 +52,9 @@ A la racine du projetm dans un terminal entrer la commande ``docker compose up``
 
 ## Notes personnelles
 ### Liens utiles
-
+* [react-leaflet.js](https://react-leaflet.js.org/docs/start-installation/)
+* ['puzzle' resolu](https://stackoverflow.com/questions/40719689/how-to-include-leaflet-css-in-a-react-app-with-webpack)
+* [react-redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 
 ## Notes from GitLab
 ### Getting started
