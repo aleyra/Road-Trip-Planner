@@ -48,11 +48,31 @@ Merci de bien vouloir nous faire parvenir ton projet dans un délai de deux sema
 - l'utilisation de Docker est un plus. 
 
 ## Comment lancer le projet
-A la racine du projetm dans un terminal entrer la commande ``docker compose up``
+A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 
 ## Notes personnelles
+### TODO
+* dans le container Map
+    * gerer le zoom et l'affichage pour voir d'un coup toutes les etapes
+    * tracer des lignes entre les etapes
+        * ex :1 vers 2 puis 2 vers 3 ...
+* dans le container Step
+    * lister les steps
+    * mettre un bouton et un formulaire pour ajouter une step
+    * mettre un bouton a chaque etape pour supprimer l'etape
+    * mettre en place quelque chose pour bouger une etape
+    * mettre un css en place en cqs d'overlap d'etape
+    * mettre en place un bouton a chaque etape et un formulaire pour modifier une etape
+    * mettre en place un bouton et un systeme pour exporter le road trip (sauvegarde dans le Local Storage)
+        * ?
+* bonus
+    * Intègre une API pour obtenir des suggestions de destinations populaires.
+    * Ajoute des fonctionnalités de partage de l'itinéraire via un lien unique.
+    * Implémente des tests unitaires pour les composants clés de l'application.
+
+
 ### Notes
-* mettre l'img du pin dans `/front/public/
+* mettre l'img du pin dans `/front/public/`
 
 ### Liens utiles
 * [react-leaflet.js](https://react-leaflet.js.org/docs/start-installation/)
