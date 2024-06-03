@@ -14,6 +14,45 @@ import {
     checkOverlapWithPreviousStep
 } from "../redux/slices/step";
 
+function DisplayOneStep(step, index, len) {
+    const dispatch = useDispatch();
+    //TODO essayer d'ecrire les tests pour les afficher dans le console.log
+    if ( false
+        // (index > 0 && dispatch(checkOverlapWithPreviousStep(step.step_name)) == false)
+        // || (index < len - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false)
+    ) {
+        return (
+            <div className="step-overlap">
+                <li key={step.step_name}>
+                    <p>Nom : {step.step_name}</p>
+                    <p>Adresse : {step.address}</p>
+                    <p>Date d'arrivée : {step.step_arrival_date}</p>
+                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
+                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
+                </li>
+                <div className="error">Erreur : les etapes se superpose dans le temps</div>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div className="step-check-ok">
+                <li key={step.step_name}>
+                    <p>Nom : {step.step_name}</p>
+                    <p>Adresse : {step.address}</p>
+                    <p>Date d'arrivée : {step.step_arrival_date}</p>
+                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
+                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
+                </li>
+            </div>
+        );
+    }
+}
+
 function StepListContainer() {
     const dispatch = useDispatch();
     const steps = useSelector((state) => state.steps.step);
@@ -48,16 +87,20 @@ function StepListContainer() {
                                 //         {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
                                 //     </li>
                                 // </div>
-                                <li key={step.step_name}>
-                                    <p>Etape {index + 1}</p>
-                                    <p>Nom : {step.step_name}</p>
-                                    <p>Adresse : {step.address}</p>
-                                    <p>Date d'arrivée : {step.step_arrival_date}</p>
-                                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                                </li>
+
+                                // <li key={step.step_name}>
+                                //     <p>Etape {index + 1}</p>
+                                //     <p>Nom : {step.step_name}</p>
+                                //     <p>Adresse : {step.address}</p>
+                                //     <p>Date d'arrivée : {step.step_arrival_date}</p>
+                                //     <p>Nombre de jours de séjour : {step.step_days_stay}</p>
+                                //     <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                                //     <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                                //     {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
+                                // </li>
+                                <div className="step-list">
+                                    {DisplayOneStep(step, index, steps.length)}
+                                </div>
                             )
                         )
                     }
