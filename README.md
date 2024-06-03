@@ -57,11 +57,9 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
     * tracer des lignes entre les etapes
         * ex :1 vers 2 puis 2 vers 3 ...
 * dans le container Step
-    * lister les steps
     * mettre un bouton et un formulaire pour ajouter une step
-    * mettre un bouton a chaque etape pour supprimer l'etape
     * mettre en place quelque chose pour bouger une etape
-    * mettre un css en place en cqs d'overlap d'etape
+    * mettre un css en place en cas d'overlap d'etape
     * mettre en place un bouton a chaque etape et un formulaire pour modifier une etape
     * mettre en place un bouton et un systeme pour exporter le road trip (sauvegarde dans le Local Storage)
         * ?

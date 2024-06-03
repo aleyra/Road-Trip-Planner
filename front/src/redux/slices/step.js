@@ -33,26 +33,23 @@ const stepSlice = createSlice({
         addStep: (state, action) => {
             state.step.push(action.payload)
         },
-        removeStep: (state, action) => {
-            state.step = state.step.filter(step => step.step_name !== action.payload)
-        },
-        updateStep: (state, action) => {
-            const { step_name, address, GPS_coordinates, step_arrival_date, step_days_stay } = action.payload
-            const existingStep = state.step.find(step => step.step_name === step_name)
-            if (existingStep) {
-                existingStep.address = address
-                existingStep.GPS_coordinates = GPS_coordinates
-                existingStep.step_arrival_date = step_arrival_date
-                existingStep.step_days_stay = step_days_stay
+        checkOverlapWithNextStep: (state, action) => {
+            const { step_name } = action.payload
+            const step = state.step.find(step => step.step_name === step_name)
+            const index = state.step.indexOf(step)
+            if (index < state.step.length - 1) {
+                if (step.step_arrival_date + step.step_days_stay > state.step[index + 1].step_arrival_date) {
+                    return false
+                }
             }
+            return true
         },
-        getStepByName: (state, action) => {
-            const step = state.step.find(step => step.step_name === action.payload)
-            return step
-        },
-        checkStep: (state) => {
-            for (let i = 0; i < state.step.length - 1; i++) {
-                if (state.step[i + 1].step_arrival_date < state.step[i].step_arrival_date + state.step[i].step_days_stay) {
+        checkOverlapWithPreviousStep: (state, action) => {
+            const { step_name } = action.payload
+            const step = state.step.find(step => step.step_name === step_name)
+            const index = state.step.indexOf(step)
+            if (index > 0) {
+                if (state.step[index - 1].step_arrival_date + state.step[index - 1].step_days_stay > step.step_arrival_date) {
                     return false
                 }
             }
@@ -66,10 +63,34 @@ const stepSlice = createSlice({
             const index2 = state.step.indexOf(step2)
             state.step[index1] = step2
             state.step[index2] = step1
-        }
+        },
+        getStepByName: (state, action) => {
+            const step = state.step.find(step => step.step_name === action.payload)
+            return step
+        },
+        removeStep: (state, action) => {
+            state.step = state.step.filter(step => step.step_name !== action.payload)
+        },
+        updateStep: (state, action) => {
+            const { step_name, address, GPS_coordinates, step_arrival_date, step_days_stay } = action.payload
+            const existingStep = state.step.find(step => step.step_name === step_name)
+            if (existingStep) {
+                existingStep.address = address
+                existingStep.GPS_coordinates = GPS_coordinates
+                existingStep.step_arrival_date = step_arrival_date
+                existingStep.step_days_stay = step_days_stay
+            }
+        },
     }
 })
 
-export const { addStep, removeStep, updateStep, getStepByName, checkStep } = stepSlice.actions;
+export const { 
+    addStep, 
+    checkOverlapWithNextStep,
+    checkOverlapWithPreviousStep,
+    getStepByName, 
+    removeStep, 
+    updateStep, 
+} = stepSlice.actions;
 
 export default stepSlice.reducer

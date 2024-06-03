@@ -5,6 +5,7 @@ import './../css/main.css';
 
 //functions
 import MyMapContainer from "./MapContainer";
+import StepListContainer from "./StepListContainer";
 
 function MainContainer() {
 	return (
@@ -18,7 +19,7 @@ function MainContainer() {
 					<MyMapContainer />
 				</div>
 				<div className="main-step">
-					<p>step TODO</p>
+					<StepListContainer />
 				</div>
 			</div>
 		</React.Fragment>
