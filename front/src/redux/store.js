@@ -5,7 +5,7 @@ import stepSlice from './slices/step';
 
 const store = configureStore({
     reducer: {
-        step: stepSlice,
+        steps: stepSlice,
     }
 })
 

@@ -51,9 +51,13 @@ Merci de bien vouloir nous faire parvenir ton projet dans un délai de deux sema
 A la racine du projetm dans un terminal entrer la commande ``docker compose up``
 
 ## Notes personnelles
+### Notes
+* mettre l'img du pin dans `/front/public/
+
 ### Liens utiles
 * [react-leaflet.js](https://react-leaflet.js.org/docs/start-installation/)
 * ['puzzle' resolu](https://stackoverflow.com/questions/40719689/how-to-include-leaflet-css-in-a-react-app-with-webpack)
+* [react-leaflet tutorial](https://blog.logrocket.com/react-leaflet-tutorial/)
 * [react-redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 
 ## Notes from GitLab
