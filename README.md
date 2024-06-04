@@ -1,8 +1,8 @@
 # Test technique Wannup 
 ## Sommaire
-* [Subject](#subject)
-* [How to launch project](#how-to-launch-project)
-* [Personnal notes](#personnal-notes)
+* [Subject](#sujet)
+* [How to launch project](#comment-lancer-le-projet)
+* [Personnal notes](#notes-personnelles)
 * [Notes from GitLab](#notes-from-gitlab)
 
 ## Sujet
