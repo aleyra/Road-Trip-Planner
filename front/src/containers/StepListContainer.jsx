@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //css
@@ -10,76 +10,75 @@ import {
     removeStep,
     updateStep,
     exchangeStep,
-    checkOverlapWithNextStep,
-    checkOverlapWithPreviousStep
 } from "../redux/slices/step";
+
+function  checkOverlapWithPreviousStep(step_name){
+    const steps = useSelector((state) => state.steps.step);
+    const index = steps.findIndex(step => step.step_name === step_name);
+    if (index == 0){
+        return false;
+    }
+    const previous_step = steps[index - 1];
+    const current_step = steps[index];
+    const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
+    const current_step_arrival_date = new Date(current_step.step_arrival_date);
+    const previous_step_days_stay = previous_step.step_days_stay;
+    const current_step_days_stay = current_step.step_days_stay;
+    const previous_step_departure_date = new Date(previous_step_arrival_date);
+    previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step_days_stay);
+    const current_step_departure_date = new Date(current_step_arrival_date);
+    current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
+    if (current_step_arrival_date < previous_step_departure_date){
+        return false;
+    }
+    return true;
+}
 
 function DisplayOneStep(step, index, len, steps) {
     const dispatch = useDispatch();
+    const [hasError, sethasError] = useState(false);
+    // console.log("step : ", step);
     //TODO essayer d'ecrire les tests pour les afficher dans le console.log
-    console.log("index : ", index);
-    if (index > 0 || index < len - 1) {
-        if (index > 0 && dispatch(checkOverlapWithPreviousStep(step.step_name)) == false){
-            console.log('il y a un chevauchement avec la step precedente')
+    // console.log("index : ", index);
+
+    useEffect(() => {
+        if (checkOverlapWithPreviousStep(step.step_name) == false){
+                sethasError(true);
         }
-        if (index < len - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false) {
-            console.log('il y a un chevauchement avec la step suivante')
-        }
-    }
-    else {
-        console.log('il n\'y a pas de step precedente ou de step suivante')
+    }, [step, hasError])
+    
+    // console.log(hasError)
+
+    let classCSS = "step-one-ok";
+    let error_msg = "*Les sejours se chevauchent avec l'étape précédente ou suivante"
+
+    if (hasError == true) {
+        classCSS = "step-one-nok";
+    } else {
+        error_msg = "";
     }
 
-    // console.log("index : ", index);
-    // console.log("len : ", len);
-    // console.log("step.step_name : ", step.step_name);
-    // console.log("checkOverlapWithPreviousStep(step.step_name) : ", dispatch(checkOverlapWithPreviousStep(step.step_name)));
-    if ( false
-        // (index > 0 && dispatch(checkOverlapWithPreviousStep(step.step_name)) == false)
-        // || (index < len - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false)
-    ) {
-        return (
-            <div>
-                <div className="step-one-nok">
-                    <div className="step-number">{index + 1}</div>
-                    <div>
-                        <p>Nom : {step.step_name}</p>
-                        <p>Adresse : {step.address}</p>
-                        <p>Date d'arrivée : {step.step_arrival_date}</p>
-                        <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                    </div>
-                    <div>
-                        <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                        <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                        {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                    </div>
+
+    return (
+        <div>
+            <div className={classCSS}>
+                <div className="step-number">{index + 1}</div>
+                <div>
+                    <p>Nom : {step.step_name}</p>
+                    <p>Adresse : {step.address}</p>
+                    <p>Date d'arrivée : {step.step_arrival_date}</p>
+                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
                 </div>
-                <div className="error">
-                    * Les dates de séjour se chevauchent
+                <div>
+                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
                 </div>
             </div>
-        );
-    }
-    else {
-        return (
-            <div>
-                <div className="step-one-ok">
-                    <div className="step-number">{index + 1}</div>
-                    <div>
-                        <p>Nom : {step.step_name}</p>
-                        <p>Adresse : {step.address}</p>
-                        <p>Date d'arrivée : {step.step_arrival_date}</p>
-                        <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                    </div>
-                    <div>
-                        <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                        <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                        {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+            <div className="error">{error_msg}</div>
+
+        </div>
+    );
 }
 
 function StepListContainer() {
@@ -94,7 +93,7 @@ function StepListContainer() {
                 {
                     steps.map(
                         (step, index = 0) => (
-                            <div className="step-list">
+                            <div className="step-list" key={index}>
                                 {DisplayOneStep(step, index, steps.length, steps)}
                             </div>
                         )
@@ -138,29 +137,44 @@ function StepListContainer() {
 
         return(
             <React.Fragment>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Nom de l'étape :
-                        <input type="text" value={step_name} onChange={handleStep_nameChange} />
-                    </label>
-                    <label>
-                        Adresse :
-                        <input type="text" value={address} onChange={handleAddressChange} />
-                    </label>
-                    <label>
-                        Coordonnées GPS :
-                        <input type="text" value={GPS_coordinates} onChange={handleGPS_coordinatesChange} />
-                    </label>
-                    <label>
-                        Date d'arrivée :
-                        <input type="date" value={step_arrival_date} onChange={handleStep_arrival_dateChange} />
-                    </label>
-                    <label>
-                        Nombre de jours de séjour :
-                        <input type="number" value={step_days_stay} onChange={handleStep_days_stayChange} />
-                    </label>
-                    <button type="submit">Ajouter</button>
-                </form>
+                <div className="step-form">
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>
+                                Nom de l'étape :
+                                <input type="text" value={step_name} onChange={handleStep_nameChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Adresse :
+                                <input type="text" value={address} onChange={handleAddressChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Coordonnées GPS :
+                                <input type="text" value={GPS_coordinates} onChange={handleGPS_coordinatesChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Date d'arrivée :
+                                <input type="date" value={step_arrival_date} onChange={handleStep_arrival_dateChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Nombre de jours de séjour :
+                                <input type="number" value={step_days_stay} onChange={handleStep_days_stayChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <button type="submit">Ajouter</button>
+                        </div>
+                    </form>
+
+                </div>
             </React.Fragment>
         );
     }
@@ -171,7 +185,7 @@ function StepListContainer() {
                 <div className="step-list">
                     <DisplayStep />
                 </div>
-                <div className="add-step">
+                <div className="step-add">
                     <h2>Add Step</h2>
                     <AddStep />
                 </div>

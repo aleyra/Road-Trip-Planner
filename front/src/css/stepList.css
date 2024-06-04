@@ -1,3 +1,5 @@
+
+
 .step-main {
   display: flex;
   flex-direction: column;
@@ -78,13 +80,37 @@
   border: 1px solid red;
 }
 
+.step-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+  /* border: 1px solid #452e88; */
+  /* border-radius: 10px; */
+  background-color: ;
+  /* tmp */
+  /* width: 100%; */
+  height: 100%;
+}
+
+.step-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid var(--bg-wannup-violet);
+  border-radius: 10px;
+  background-color: ;
+  /* tmp */
+  /* width: 100%; */
+  height: 100%;
+
+}
 
 .error {
   color: red;
 }
-
-
-/* #452e88 violet wannup
-#f79d2c orange wannup
-#e7a147 orange logo wannup
-#413484 violet logo wannup */

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
     step: [
@@ -6,14 +6,14 @@ const initialState = {
             address: 'Lyon, France',
             GPS_coordinates: [45.75, 4.85],
             step_name: 'Lyon',
-            step_arrival_date: Date('2024-06-13'),
+            step_arrival_date: Date('1995-12-17T03:24:00'),
             step_days_stay: 1
         },
         {
             address: 'Paris, France',
             GPS_coordinates: [48.85, 2.35],
             step_name: 'Paris',
-            step_arrival_date: Date('2024-06-14'),
+            step_arrival_date: Date('2024 06 14'),
             step_days_stay: 3
         },
         {
@@ -28,32 +28,10 @@ const initialState = {
 
 const stepSlice = createSlice({
     name: 'step',
-    initialState,
+    initialState: initialState,
     reducers: {
         addStep: (state, action) => {
             state.step.push(action.payload)
-        },
-        checkOverlapWithNextStep: (state, action) => {
-            const { step_name } = action.payload
-            const step = state.step.find(step => step.step_name === step_name)
-            const index = state.step.indexOf(step)
-            if (index < state.step.length - 1) {
-                if (step.step_arrival_date + step.step_days_stay > state.step[index + 1].step_arrival_date) {
-                    return false
-                }
-            }
-            return true
-        },
-        checkOverlapWithPreviousStep: (state, action) => {
-            const { step_name } = action.payload
-            const step = state.step.find(step => step.step_name === step_name)
-            const index = state.step.indexOf(step)
-            if (index > 0) {
-                if (state.step[index - 1].step_arrival_date + state.step[index - 1].step_days_stay > step.step_arrival_date) {
-                    return false
-                }
-            }
-            return true
         },
         exchangeStep: (state, action) => {
             const { step_name1, step_name2 } = action.payload
@@ -63,10 +41,6 @@ const stepSlice = createSlice({
             const index2 = state.step.indexOf(step2)
             state.step[index1] = step2
             state.step[index2] = step1
-        },
-        getStepByName: (state, action) => {
-            const step = state.step.find(step => step.step_name === action.payload)
-            return step
         },
         removeStep: (state, action) => {
             state.step = state.step.filter(step => step.step_name !== action.payload)
@@ -86,9 +60,6 @@ const stepSlice = createSlice({
 
 export const { 
     addStep, 
-    checkOverlapWithNextStep,
-    checkOverlapWithPreviousStep,
-    getStepByName, 
     removeStep, 
     updateStep, 
 } = stepSlice.actions;

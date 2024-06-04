@@ -1,3 +1,11 @@
+:root {
+  --bg-wannup-orange: #f79d2c;
+  --bg-wannup-violet: #452e88;
+  --logo-wannup-orange: #e7a147;
+  --logo-wannup-violet: #413484;
+
+}
+
 .App {
   text-align: center;
 }
