@@ -14,40 +14,69 @@ import {
     checkOverlapWithPreviousStep
 } from "../redux/slices/step";
 
-function DisplayOneStep(step, index, len) {
+function DisplayOneStep(step, index, len, steps) {
     const dispatch = useDispatch();
     //TODO essayer d'ecrire les tests pour les afficher dans le console.log
+    console.log("index : ", index);
+    if (index > 0 || index < len - 1) {
+        if (index > 0 && dispatch(checkOverlapWithPreviousStep(step.step_name)) == false){
+            console.log('il y a un chevauchement avec la step precedente')
+        }
+        if (index < len - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false) {
+            console.log('il y a un chevauchement avec la step suivante')
+        }
+    }
+    else {
+        console.log('il n\'y a pas de step precedente ou de step suivante')
+    }
+
+    // console.log("index : ", index);
+    // console.log("len : ", len);
+    // console.log("step.step_name : ", step.step_name);
+    // console.log("checkOverlapWithPreviousStep(step.step_name) : ", dispatch(checkOverlapWithPreviousStep(step.step_name)));
     if ( false
         // (index > 0 && dispatch(checkOverlapWithPreviousStep(step.step_name)) == false)
         // || (index < len - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false)
     ) {
         return (
-            <div className="step-overlap">
-                <li key={step.step_name}>
-                    <p>Nom : {step.step_name}</p>
-                    <p>Adresse : {step.address}</p>
-                    <p>Date d'arrivée : {step.step_arrival_date}</p>
-                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                </li>
-                <div className="error">Erreur : les etapes se superpose dans le temps</div>
+            <div>
+                <div className="step-one-nok">
+                    <div className="step-number">{index + 1}</div>
+                    <div>
+                        <p>Nom : {step.step_name}</p>
+                        <p>Adresse : {step.address}</p>
+                        <p>Date d'arrivée : {step.step_arrival_date}</p>
+                        <p>Nombre de jours de séjour : {step.step_days_stay}</p>
+                    </div>
+                    <div>
+                        <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                        <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                        {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
+                    </div>
+                </div>
+                <div className="error">
+                    * Les dates de séjour se chevauchent
+                </div>
             </div>
         );
     }
     else {
         return (
-            <div className="step-check-ok">
-                <li key={step.step_name}>
-                    <p>Nom : {step.step_name}</p>
-                    <p>Adresse : {step.address}</p>
-                    <p>Date d'arrivée : {step.step_arrival_date}</p>
-                    <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                    {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                </li>
+            <div>
+                <div className="step-one-ok">
+                    <div className="step-number">{index + 1}</div>
+                    <div>
+                        <p>Nom : {step.step_name}</p>
+                        <p>Adresse : {step.address}</p>
+                        <p>Date d'arrivée : {step.step_arrival_date}</p>
+                        <p>Nombre de jours de séjour : {step.step_days_stay}</p>
+                    </div>
+                    <div>
+                        <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                        <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                        {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
+                    </div>
+                </div>
             </div>
         );
     }
@@ -61,50 +90,16 @@ function StepListContainer() {
         const steps = useSelector((state) => state.steps.step);
         return (
             <React.Fragment>
-                <h2>Step List</h2>
-                <ol>
-                    {
-                        steps.map(
-                            (step, index = 0) => (
-                                // if (
-                                //     (index > 0 &&  dispatch(checkOverlapWithPreviousStep(step.step_name)) == false)
-                                //     || (index < steps.length - 1 && dispatch(checkOverlapWithNextStep(step.step_name)) == false)
-                                // ) {
-                                // <div className="step-overlap">
-                                //         <p>Erreur les etapes se supperpose dans le temps</p>
-                                // }
-                                // else {
-                                //     <div className="step-check-ok">
-                                // }
-                                //     <li key={step.step_name}>
-                                //         <p>Etape {index + 1}</p>
-                                //         <p>Nom : {step.step_name}</p>
-                                //         <p>Adresse : {step.address}</p>
-                                //         <p>Date d'arrivée : {step.step_arrival_date}</p>
-                                //         <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                                //         <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                                //         <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                                //         {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                                //     </li>
-                                // </div>
-
-                                // <li key={step.step_name}>
-                                //     <p>Etape {index + 1}</p>
-                                //     <p>Nom : {step.step_name}</p>
-                                //     <p>Adresse : {step.address}</p>
-                                //     <p>Date d'arrivée : {step.step_arrival_date}</p>
-                                //     <p>Nombre de jours de séjour : {step.step_days_stay}</p>
-                                //     <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
-                                //     <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
-                                //     {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
-                                // </li>
-                                <div className="step-list">
-                                    {DisplayOneStep(step, index, steps.length)}
-                                </div>
-                            )
+                <h2>Liste des étapes</h2>
+                {
+                    steps.map(
+                        (step, index = 0) => (
+                            <div className="step-list">
+                                {DisplayOneStep(step, index, steps.length, steps)}
+                            </div>
                         )
-                    }
-                </ol>
+                    )
+                }
             </React.Fragment>
         );
     }
@@ -172,12 +167,14 @@ function StepListContainer() {
 
     return (
         <React.Fragment>
-            <div className="step-list">
-                <DisplayStep />
-            </div>
-            <div className="add-step">
-                <h2>Add Step</h2>
-                <AddStep />
+            <div className="step-main">
+                <div className="step-list">
+                    <DisplayStep />
+                </div>
+                <div className="add-step">
+                    <h2>Add Step</h2>
+                    <AddStep />
+                </div>
             </div>
         </React.Fragment>
     );
