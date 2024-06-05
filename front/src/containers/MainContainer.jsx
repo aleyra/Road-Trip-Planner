@@ -5,7 +5,7 @@ import './../css/main.css';
 
 //functions
 import MyMapContainer from "./MapContainer";
-import StepListContainer from "./StepListContainer";
+import StepListContainer from "./stepsContainers/StepListContainer";
 
 function MainContainer() {
 	return (
