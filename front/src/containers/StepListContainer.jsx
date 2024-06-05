@@ -12,42 +12,88 @@ import {
     exchangeStep,
 } from "../redux/slices/step";
 
-function  checkOverlapWithPreviousStep(step_name){
-    const steps = useSelector((state) => state.steps.step);
-    const index = steps.findIndex(step => step.step_name === step_name);
-    if (index == 0){
-        return false;
-    }
-    const previous_step = steps[index - 1];
-    const current_step = steps[index];
-    const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
-    const current_step_arrival_date = new Date(current_step.step_arrival_date);
-    const previous_step_days_stay = previous_step.step_days_stay;
-    const current_step_days_stay = current_step.step_days_stay;
-    const previous_step_departure_date = new Date(previous_step_arrival_date);
-    previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step_days_stay);
-    const current_step_departure_date = new Date(current_step_arrival_date);
-    current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
-    if (current_step_arrival_date < previous_step_departure_date){
-        return false;
-    }
-    return true;
-}
 
-function DisplayOneStep(step, index, len, steps) {
+function DisplayOneStep(step, index) {
     const dispatch = useDispatch();
-    const [hasError, sethasError] = useState(false);
+    // const [hasError, sethasError] = useState(false);
+    let hasError = false;
+
+    const steps = useSelector((state) => state.steps.step);
+    
+    // function checkOverlapWithNextStep(step_name){
+    //     const index = steps.findIndex(step => step.step_name === step_name);
+    //     if (index == steps.length - 1){
+    //         return false;
+    //     }
+    //     const next_step = steps[index + 1];
+    //     const current_step = steps[index];
+    //     const next_step_arrival_date = new Date(next_step.step_arrival_date);
+    //     const current_step_arrival_date = new Date(current_step.step_arrival_date);
+    //     const next_step_days_stay = next_step.step_days_stay;
+    //     const current_step_days_stay = current_step.step_days_stay;
+    //     const next_step_departure_date = new Date(next_step_arrival_date);
+    //     next_step_departure_date.setDate(next_step_departure_date.getDate() + next_step_days_stay);
+    //     const current_step_departure_date = new Date(current_step_arrival_date);
+    //     current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
+    //     if (current_step_departure_date > next_step_arrival_date){
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
+    // function  checkOverlapWithPreviousStep(step_name){
+    //     // const steps = useSelector((state) => state.steps.step);
+    //     const index = steps.findIndex(step => step.step_name === step_name);
+    //     if (index == 0){
+    //         return false;
+    //     }
+    //     const previous_step = steps[index - 1];
+    //     const current_step = steps[index];
+    //     const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
+    //     const current_step_arrival_date = new Date(current_step.step_arrival_date);
+    //     const previous_step_days_stay = previous_step.step_days_stay;
+    //     const current_step_days_stay = current_step.step_days_stay;
+    //     const previous_step_departure_date = new Date(previous_step_arrival_date);
+    //     previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step_days_stay);
+    //     const current_step_departure_date = new Date(current_step_arrival_date);
+    //     current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
+    //     if (current_step_arrival_date < previous_step_departure_date){
+    //         return false;
+    //     }
+    //     return true;
+    // }    
+ 
     // console.log("step : ", step);
     //TODO essayer d'ecrire les tests pour les afficher dans le console.log
     // console.log("index : ", index);
 
-    useEffect(() => {
-        if (checkOverlapWithPreviousStep(step.step_name) == false){
-                sethasError(true);
+    // useEffect(() => {
+        // if (checkOverlapWithPreviousStep(step.step_name) == false || checkOverlapWithNextStep(step.step_name) == false){
+        //         sethasError(true);
+        // }
+    // }, [step, hasError])
+    console.log("index : ", index);
+
+    // prepare var to check overlapping with next and previous steps
+    const current_step = step;
+    const current_step_arrival_date = new Date(current_step.step_arrival_date);
+    const current_step_days_stay = current_step.step_days_stay;
+    const current_step_departure_date = new Date(current_step_arrival_date);
+    current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
+    console.log("current_step_departure_date : ", current_step_departure_date);
+    if (index != 0){
+        const previous_step = steps[index - 1];
+        const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
+        if (current_step_departure_date > previous_step_arrival_date) {
+            // sethasError(true);
+            console.log("current_step_departure_date > previous_step_arrival_date");
+            hasError = true;
         }
-    }, [step, hasError])
+    }
+
+
     
-    // console.log(hasError)
+    console.log(hasError)
 
     let classCSS = "step-one-ok";
     let error_msg = "*Les sejours se chevauchent avec l'étape précédente ou suivante"
@@ -58,6 +104,13 @@ function DisplayOneStep(step, index, len, steps) {
         error_msg = "";
     }
 
+    // get arrival date in french format
+    const arrival_date = new Date(step.step_arrival_date);
+    console.log("arrival_date : ", arrival_date);
+    const day = arrival_date.getDate();
+    const month = arrival_date.getMonth() + 1; // don't know why getMonth() return month - 1
+    const year = arrival_date.getFullYear();
+    const txt_arrival_date = `${day.toString().padStart(2, "0")}/${month.toString().padStart(2,"0")}/${year.toString()}`;
 
     return (
         <div>
@@ -66,7 +119,7 @@ function DisplayOneStep(step, index, len, steps) {
                 <div>
                     <p>Nom : {step.step_name}</p>
                     <p>Adresse : {step.address}</p>
-                    <p>Date d'arrivée : {step.step_arrival_date}</p>
+                    <p>Date d'arrivée : {txt_arrival_date}</p>
                     <p>Nombre de jours de séjour : {step.step_days_stay}</p>
                 </div>
                 <div>
@@ -94,7 +147,7 @@ function StepListContainer() {
                     steps.map(
                         (step, index = 0) => (
                             <div className="step-list" key={index}>
-                                {DisplayOneStep(step, index, steps.length, steps)}
+                                {DisplayOneStep(step, index)}
                             </div>
                         )
                     )

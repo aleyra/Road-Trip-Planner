@@ -6,22 +6,29 @@ const initialState = {
             address: 'Lyon, France',
             GPS_coordinates: [45.75, 4.85],
             step_name: 'Lyon',
-            step_arrival_date: Date('1995-12-17T03:24:00'),
+            step_arrival_date: '2024-06-12',
             step_days_stay: 1
         },
         {
             address: 'Paris, France',
             GPS_coordinates: [48.85, 2.35],
             step_name: 'Paris',
-            step_arrival_date: Date('2024 06 14'),
+            step_arrival_date: '2024-06-13',
             step_days_stay: 3
         },
         {
             address: 'Marseille, France',
             GPS_coordinates: [43.3, 5.4],
             step_name: 'Marseille',
-            step_arrival_date: Date('2024-06-17'),
+            step_arrival_date: '2024-06-14',
             step_days_stay: 2
+        },
+        {
+            address: 'Nice, France',
+            GPS_coordinates: [43.7, 7.25],
+            step_name: 'Nice',
+            step_arrival_date: '2024-06-16',
+            step_days_stay: 1
         }
     ]
 }
