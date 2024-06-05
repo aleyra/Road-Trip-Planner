@@ -2,6 +2,7 @@
 ## Sommaire
 * [Sujet](#sujet)
 * [Comment lancer le projet](#comment-lancer-le-projet)
+* [Notes a l'intention des observateurs de chez Wannup](#notes-a-lintention-des-observateurs-de-chez-wannup)
 * [Notes personnelles](#notes-personnelles)
 * [Notes from GitLab](#notes-from-gitlab)
 
@@ -50,16 +51,21 @@ Merci de bien vouloir nous faire parvenir ton projet dans un délai de deux sema
 ## Comment lancer le projet
 A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 
+## Notes a l'intention des observateurs de chez Wannup
+* J'ai recupere les couleurs de Wannup depuis votre site
+* J'essaie d'eviter d'utiliser des librairies le plus possible parce que les librairies qui sont gratuite pour les particuliers/etudiants ne le sont pas necessaire;ent pour les entreprises
+* J'ai mis en place un docker compose pour pouvoir ajouter (j'espere avant la fin de temps imparti) un container avec le back, en attendant j'utilise redux
+
 ## Notes personnelles
 ### TODO
 * dans le container Map
     * gerer le zoom et l'affichage pour voir d'un coup toutes les etapes
-    * tracer des lignes entre les etapes
+    * tracer le parcours entre les differentes etapes
         * ex :1 vers 2 puis 2 vers 3 ...
 * dans le container Step
     * mettre un bouton et un formulaire pour ajouter une step
+    * passer d'une adresse aux coordonnees GPS
     * mettre en place quelque chose pour bouger une etape
-    * mettre un css en place en cas d'overlap d'etape
     * mettre en place un bouton a chaque etape et un formulaire pour modifier une etape
     * mettre en place un bouton et un systeme pour exporter le road trip (sauvegarde dans le Local Storage)
         * ?
@@ -77,6 +83,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * ['puzzle' resolu](https://stackoverflow.com/questions/40719689/how-to-include-leaflet-css-in-a-react-app-with-webpack)
 * [react-leaflet tutorial](https://blog.logrocket.com/react-leaflet-tutorial/)
 * [react-redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
+* [afficher la date en dd/mm/yyyy](https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object)
 
 ## Notes from GitLab
 ### Getting started

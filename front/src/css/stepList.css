@@ -7,7 +7,7 @@
   justify-content: center;
   /* padding: 10px; */
   margin: 20px;
-  border: 1px solid var(--bg-wannup-violet);
+  border: 3px solid var(--bg-wannup-violet);
   border-radius: 10px;
   background-color: ;
   background-color: darkgray;
@@ -23,7 +23,7 @@
   justify-content: center;
   /* padding: 10px; */
   margin: 10px;
-  border: 1px solid darkgray;
+  border: 3px solid darkgray;
   border-radius: 10px;
   background-color: ;
   /* tmp */
@@ -64,7 +64,7 @@
   margin-top: 10px;
   height: 100%;
   border-radius: 10px;
-  border: 1px solid green;
+  border: 3px solid green;
 }
 
 .step-one-nok {
@@ -77,7 +77,7 @@
   margin-top: 10px;
   height: 100%;
   border-radius: 10px;
-  border: 1px solid red;
+  border: 3px solid red;
 }
 
 .step-add {
@@ -102,7 +102,7 @@
   justify-content: center;
   padding: 10px;
   margin: 10px;
-  border: 1px solid var(--bg-wannup-violet);
+  border: 3px solid var(--bg-wannup-orange);
   border-radius: 10px;
   background-color: ;
   /* tmp */
