@@ -84,6 +84,8 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * [react-leaflet tutorial](https://blog.logrocket.com/react-leaflet-tutorial/)
 * [react-redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 * [afficher la date en dd/mm/yyyy](https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object)
++* [leaflet-geosearch](https://smeijer.github.io/leaflet-geosearch/#installation)
+
 
 ## Notes from GitLab
 ### Getting started

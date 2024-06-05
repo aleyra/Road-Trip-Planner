@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //css
 import './../css/stepList.css';
+import './../css/leaflet-geosearch.css';
 
 //reduc actions
 import {
