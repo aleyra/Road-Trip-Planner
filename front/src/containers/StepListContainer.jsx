@@ -40,28 +40,6 @@ function DisplayOneStep(step, index) {
     //     }
     //     return true;
     // }
-
-    // function  checkOverlapWithPreviousStep(step_name){
-    //     // const steps = useSelector((state) => state.steps.step);
-    //     const index = steps.findIndex(step => step.step_name === step_name);
-    //     if (index == 0){
-    //         return false;
-    //     }
-    //     const previous_step = steps[index - 1];
-    //     const current_step = steps[index];
-    //     const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
-    //     const current_step_arrival_date = new Date(current_step.step_arrival_date);
-    //     const previous_step_days_stay = previous_step.step_days_stay;
-    //     const current_step_days_stay = current_step.step_days_stay;
-    //     const previous_step_departure_date = new Date(previous_step_arrival_date);
-    //     previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step_days_stay);
-    //     const current_step_departure_date = new Date(current_step_arrival_date);
-    //     current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
-    //     if (current_step_arrival_date < previous_step_departure_date){
-    //         return false;
-    //     }
-    //     return true;
-    // }    
  
     // console.log("step : ", step);
     //TODO essayer d'ecrire les tests pour les afficher dans le console.log
@@ -84,9 +62,18 @@ function DisplayOneStep(step, index) {
     if (index != 0){
         const previous_step = steps[index - 1];
         const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
-        if (current_step_departure_date > previous_step_arrival_date) {
-            // sethasError(true);
-            console.log("current_step_departure_date > previous_step_arrival_date");
+        const previous_step_departure_date = new Date(previous_step_arrival_date);
+        previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step.step_days_stay);
+        if (previous_step_departure_date > current_step_arrival_date) {
+            console.log("previous_step_departure_date > current_step_arrival_date");
+            hasError = true;
+        }
+    }
+    if (index != steps.length - 1){
+        const next_step = steps[index + 1];
+        const next_step_arrival_date = new Date(next_step.step_arrival_date);
+        if (current_step_departure_date > next_step_arrival_date) {
+            console.log("current_step_departure_date > next_step_arrival_date");
             hasError = true;
         }
     }
@@ -96,7 +83,7 @@ function DisplayOneStep(step, index) {
     console.log(hasError)
 
     let classCSS = "step-one-ok";
-    let error_msg = "*Les sejours se chevauchent avec l'étape précédente ou suivante"
+    let error_msg = "*Le sejour se chevauche avec l'étape précédente ou suivante"
 
     if (hasError == true) {
         classCSS = "step-one-nok";
