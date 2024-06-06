@@ -70,9 +70,10 @@ function AddStep(){
 
     function handleSubmit(e){
         e.preventDefault();
+        const GPS_coordinates = [GPSLatitude, GPSLongitude];
         dispatch(addStep({
             address, 
-            GPS_coordinate: [GPSLatitude, GPSLongitude], 
+            GPS_coordinates, 
             step_name: stepName, 
             step_arrival_date: stepArrivalDate, 
             step_days_stay: stepDaysStay,

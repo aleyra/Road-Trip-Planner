@@ -12,9 +12,8 @@ import {
 } from "../../redux/slices/step";
 
 
-function DisplayOneStep(step, index) {
+function DisplayOneStep(step, index, steps) {
     const dispatch = useDispatch();
-    const steps = useSelector((state) => state.steps.step);
 
     let hasError = false;
 

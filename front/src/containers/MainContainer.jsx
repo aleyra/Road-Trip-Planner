@@ -16,7 +16,7 @@ function MainContainer() {
 			</div>
 			<div className="main-body">
 				<div className="main-map">
-					{/* <MyMapContainer /> */}
+					<MyMapContainer />
 				</div>
 				<div className="main-step">
 					<StepListContainer />

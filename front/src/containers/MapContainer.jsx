@@ -43,14 +43,9 @@ function MyMarker(step, indice){
 function MyMapContainer() {
     
     const dispatch = useDispatch();
-
     const steps = useSelector((state) => state.steps.step);
-    const [currentSteps, setCurrentSteps] = React.useState([]);
 
-    useEffect(() => {
-        dispatch(order());
-        setCurrentSteps(steps);
-    }, [steps]);
+    dispatch(order());
 
     return (
         <React.Fragment>
@@ -73,7 +68,7 @@ function MyMapContainer() {
                         A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker> */}
-                {currentSteps.map((step, i = 0) => (
+                {steps.map((step, i = 0) => (
                     MyMarker(step, i + 1)
                 ))}
             </MapContainer>
