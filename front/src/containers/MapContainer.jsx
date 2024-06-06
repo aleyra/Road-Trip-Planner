@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     MapContainer,
     TileLayer,
-    useMap,
     Marker,
     Popup
 } from 'react-leaflet'
@@ -14,6 +13,7 @@ import './../css/map.css';
 import 'leaflet/dist/leaflet.css';
 
 //redux actions
+import { order } from "../redux/slices/step";
 
 const pin = new Icon({
     iconUrl: "/pin.png",
@@ -42,10 +42,15 @@ function MyMarker(step, indice){
 
 function MyMapContainer() {
     
-
     const dispatch = useDispatch();
 
     const steps = useSelector((state) => state.steps.step);
+    const [currentSteps, setCurrentSteps] = React.useState([]);
+
+    useEffect(() => {
+        dispatch(order());
+        setCurrentSteps(steps);
+    }, [steps]);
 
     return (
         <React.Fragment>
@@ -68,7 +73,7 @@ function MyMapContainer() {
                         A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker> */}
-                {steps.map((step, i = 0) => (
+                {currentSteps.map((step, i = 0) => (
                     MyMarker(step, i + 1)
                 ))}
             </MapContainer>

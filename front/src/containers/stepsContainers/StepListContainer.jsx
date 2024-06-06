@@ -3,14 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 //css
 import './../../css/stepList.css';
-import './../../css/leaflet-geosearch.css';
 
 //reduc actions
 import {
-    addStep,
-    removeStep,
-    updateStep,
-    exchangeStep,
+    order,
 } from "../../redux/slices/step";
 
 //functions
@@ -18,11 +14,17 @@ import DisplayOneStep from "./DisplayOneStepContainer";
 import AddStep from "./AddStepContainer";
 
 function StepListContainer() {
-    const dispatch = useDispatch();
-    const steps = useSelector((state) => state.steps.step);
-
+    
     function DisplayStep() {
+        const dispatch = useDispatch();
+        const [currentSteps, setCurrentSteps] = useState([]);
         const steps = useSelector((state) => state.steps.step);
+
+        useEffect(() => {
+            dispatch(order());
+            setCurrentSteps(steps);
+        }, [steps]);
+
         return (
             <React.Fragment>
                 <h2>Liste des étapes</h2>

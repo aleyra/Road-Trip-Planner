@@ -1,49 +1,82 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+// import { useMap } from "react-leaflet";
+// import * as L from "leaflet";
 
 //css
 import './../../css/stepList.css';
-import './../../css/leaflet-geosearch.css';
+import "leaflet-geosearch/dist/geosearch.css";
 
 //reduc actions
 import {
     addStep,
-    removeStep,
-    updateStep,
-    exchangeStep,
 } from "../../redux/slices/step";
 
 function AddStep(){
     const dispatch = useDispatch();
-    const [step_name, setStep_name] = useState("");
+    const [stepName, setStepName] = useState("");
     const [address, setAddress] = useState("");
-    const [GPS_coordinates, setGPS_coordinates] = useState([]);
-    const [step_arrival_date, setStep_arrival_date] = useState("");
-    const [step_days_stay, setStep_days_stay] = useState(0);
+    // const [GPS_coordinates, setGPS_coordinates] = useState([]);
+    const [GPSLatitude, setGPSLatitude] = useState(45.75934600830078);
+    const [GPSLongitude, setGPSLongitude] = useState(4.844399929046631);
+    const [stepArrivalDate, setStepArrivalDate] = useState("");
+    const [stepDaysStay, setStepDaysStay] = useState(0);
+
+    // const provider = new OpenStreetMapProvider();
+    // const options = {
+    //     notFoundMessage: "No results found",
+    //     provider: provider,
+    //     style: "bar",
+    //     showPopup: true,
+    // };
+    // const searchControl = new GeoSearchControl(options);
+    // const map = useMap();
 
     function handleStep_nameChange(e){
-        setStep_name(e.target.value);
+        setStepName(e.target.value);
     }
 
     function handleAddressChange(e){
+        // useEffect(() => {
+        //     map.addControl(searchControl);  // Add event listener for search results
+        //     map.on("geosearch/showlocation", (result) => {
+        //         console.log("Search result:", result);  // process the result here, e.g., update state, show a custom popup, etc.
+        //     });
+        //     return () => {
+        //         map.removeControl(searchControl);   // Remove event listener when component unmounts
+        //         map.off("geosearch/showlocation");
+        //     };
+        // }, [map, searchControl]);
+        // setAddress(result.label);   // ?
+        // setGPS_coordinates([result.y, result.x]);
         setAddress(e.target.value);
     }
 
-    function handleGPS_coordinatesChange(e){
-        setGPS_coordinates(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
+    function handleGPS_latitudeChange(e){
+        setGPSLatitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
+    }
+    function handleGPS_longitudeChange(e){
+        setGPSLongitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
     }
 
     function handleStep_arrival_dateChange(e){
-        setStep_arrival_date(e.target.value);
+        setStepArrivalDate(e.target.value);
     }
 
     function handleStep_days_stayChange(e){
-        setStep_days_stay(e.target.value);
+        setStepDaysStay(e.target.value);
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(addStep({step_name, address, GPS_coordinates, step_arrival_date, step_days_stay}));
+        dispatch(addStep({
+            address, 
+            GPS_coordinate: [GPSLatitude, GPSLongitude], 
+            step_name: stepName, 
+            step_arrival_date: stepArrivalDate, 
+            step_days_stay: stepDaysStay,
+        }));
     }
 
     return(
@@ -53,7 +86,7 @@ function AddStep(){
                     <div>
                         <label>
                             Nom de l'étape :
-                            <input type="text" value={step_name} onChange={handleStep_nameChange} />
+                            <input type="text" value={stepName} onChange={handleStep_nameChange} />
                         </label>
                     </div>
                     <div>
@@ -64,20 +97,26 @@ function AddStep(){
                     </div>
                     <div>
                         <label>
-                            Coordonnées GPS :
-                            <input type="text" value={GPS_coordinates} onChange={handleGPS_coordinatesChange} />
+                            Coordonnées GPS latitude:
+                            <input type="text" value={GPSLatitude} onChange={handleGPS_latitudeChange} />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Coordonnées GPS longitude:
+                            <input type="text" value={GPSLongitude} onChange={handleGPS_longitudeChange} />
                         </label>
                     </div>
                     <div>
                         <label>
                             Date d'arrivée :
-                            <input type="date" value={step_arrival_date} onChange={handleStep_arrival_dateChange} />
+                            <input type="date" value={stepArrivalDate} onChange={handleStep_arrival_dateChange} />
                         </label>
                     </div>
                     <div>
                         <label>
                             Nombre de jours de séjour :
-                            <input type="number" value={step_days_stay} onChange={handleStep_days_stayChange} />
+                            <input type="number" value={stepDaysStay} onChange={handleStep_days_stayChange} />
                         </label>
                     </div>
                     <div>
@@ -91,3 +130,36 @@ function AddStep(){
 }
 
 export default AddStep;
+
+/*
+import { useEffect } from "react";
+import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import "leaflet-geosearch/dist/geosearch.css";
+import { useMap } from "react-leaflet";
+import * as L from "leaflet";
+
+const SearchField = () => {
+    console.log("SearchField");
+    const provider = new OpenStreetMapProvider();
+    const options = {
+        notFoundMessage: "No results found",
+        provider: provider,
+        style: "bar",
+        showPopup: true,
+    };
+    const searchControl = new GeoSearchControl(options);
+    const map = useMap();
+    useEffect(() => {
+        map.addControl(searchControl as L.Control);     // Add event listener for search results
+        map.on("geosearch/showlocation", (result) => {
+            console.log("Search result:", result);       // process the result here, e.g., update state, show a custom popup, etc.
+        });
+        return () => {
+            map.removeControl(searchControl as L.Control);       // Remove event listener when component unmounts
+            map.off("geosearch/showlocation");
+        };
+    }, [map, searchControl]);
+    return null; }; 
+
+export default SearchField;
+*/

@@ -62,13 +62,17 @@ const stepSlice = createSlice({
                 existingStep.step_days_stay = step_days_stay
             }
         },
+        order: (state, action) => {
+            state.step = state.step.sort((a, b) => a.step_arrival_date.localeCompare(b.step_arrival_date))
+        }
     }
 })
 
 export const { 
     addStep, 
     removeStep, 
-    updateStep, 
+    updateStep,
+    order,
 } = stepSlice.actions;
 
 export default stepSlice.reducer
