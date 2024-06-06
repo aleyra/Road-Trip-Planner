@@ -12,7 +12,7 @@ Développer une mini-application de planification de road trip
 
 ### Specification
 #### Création d'un Itinéraire :
-Permettre aux utilisateurs d'ajouter des destinations avec des détails comme le nom, la date d'arrivée, et le nombre de jours de séjour.
+Permettre aux utilisateurs d'ajouter des destinations avec des détails comme le nom, la date d'arrivée, et le Durée du séjour en jours.
 Implémente un formulaire pour ajouter ces informations.
 
 #### Affichage de l'Itinéraire :
@@ -55,6 +55,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 ## Notes a l'intention des observateurs de chez Wannup
 * J'ai récuperé les couleurs de Wannup depuis votre site
 * J'essaie d'éviter d'utiliser des librairies le plus possible parce que les librairies qui sont gratuites pour les particuliers/étudiants ne le sont pas nécessairement pour les entreprises
+* Pour les memes raisons j'ai dessine moi-meme le marker
 * J'ai mis en place un docker compose pour pouvoir ajouter (j'espère avant la fin de temps imparti) un container avec le back, en attendant j'utilise redux
 
 ## Notes personnelles
