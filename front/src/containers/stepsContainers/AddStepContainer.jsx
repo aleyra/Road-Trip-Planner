@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-// import { useMap } from "react-leaflet";
-// import * as L from "leaflet";
+import axios from "axios";
 
 //css
 import './../../css/stepList.css';
-import "leaflet-geosearch/dist/geosearch.css";
 
 //reduc actions
 import {
@@ -17,22 +14,10 @@ function AddStep(){
     const dispatch = useDispatch();
     const [stepName, setStepName] = useState("");
     const [address, setAddress] = useState("");
-    // const [GPS_coordinates, setGPS_coordinates] = useState([]);
-    const [GPSLatitude, setGPSLatitude] = useState(45.75934600830078);
-    const [GPSLongitude, setGPSLongitude] = useState(4.844399929046631);
+    const [GPSLatitude, setGPSLatitude] = useState(null);
+    const [GPSLongitude, setGPSLongitude] = useState(null);
     const [stepArrivalDate, setStepArrivalDate] = useState("");
     const [stepDaysStay, setStepDaysStay] = useState(0);
-    // const [label, setLabel] = useState("");
-
-    // const provider = new OpenStreetMapProvider();
-    // const options = {
-    //     notFoundMessage: "No results found",
-    //     provider: provider,
-    //     style: "bar",
-    //     showPopup: true,
-    // };
-    // const searchControl = new GeoSearchControl(options);
-    // const map = useMap();
 
     function handleStep_nameChange(e){
         setStepName(e.target.value);
@@ -42,12 +27,12 @@ function AddStep(){
         setAddress(e.target.value);
     }
 
-    function handleGPS_latitudeChange(e){
-        setGPSLatitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
-    }
-    function handleGPS_longitudeChange(e){
-        setGPSLongitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
-    }
+    // function handleGPS_latitudeChange(e){
+    //     setGPSLatitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
+    // }
+    // function handleGPS_longitudeChange(e){
+    //     setGPSLongitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
+    // }
 
     function handleStep_arrival_dateChange(e){
         setStepArrivalDate(e.target.value);
@@ -57,8 +42,31 @@ function AddStep(){
         setStepDaysStay(e.target.value);
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
+        const encodedAddress = encodeURIComponent(address);
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodedAddress}&format=json&addressdetails=1&limit=1`;
+ 
+        try {
+            const response = await axios.get(url);
+            if (response.data.length > 0) {
+                const location = response.data[0];
+                if (location.lat && location.lon) {
+                    console.log(`Latitude: ${location.lat}, Longitude: ${location.lon}`);
+                    setGPSLatitude(location.lat);
+                    setGPSLongitude(location.lon);
+                } else {
+                    console.error('Coordonnées GPS non disponibles.');
+                    alert('Coordonnées GPS non disponibles pour cette adresse.');
+                }
+            } else {
+                alert('Adresse non trouvée.');
+            }
+
+        } catch (error) {
+            console.error('Erreur lors de la récupération des coordonnées:', error);
+            alert('Erreur lors de la récupération des coordonnées.');
+        }
         const GPS_coordinates = [GPSLatitude, GPSLongitude];
         dispatch(addStep({
             address, 
@@ -68,23 +76,6 @@ function AddStep(){
             step_days_stay: stepDaysStay,
         }));
     }
-
-    // useEffect(() => {
-    //     map.addControl(searchControl);  // Add event listener for search results
-    //     map.on("geosearch/showlocation", (result) => {
-    //         console.log("Search result:", result);  // process the result here, e.g., update state, show a custom popup, etc.
-    //         setLabel(result.label);
-    //         setGPSLatitude(result.y);
-    //         setGPSLongitude(result.x);
-    //     });
-    //     return () => {
-    //         map.removeControl(searchControl);   // Remove event listener when component unmounts
-    //         map.off("geosearch/showlocation");
-    //     };
-    // }, [map, searchControl]);
-    // console.log("label : ", label)   // ?
-    // const GPS = [GPSLatitude, GPSLongitude];
-    // console.log("GPS : ", GPS)   // ?
 
     return(
         <React.Fragment>
@@ -102,7 +93,7 @@ function AddStep(){
                             <input type="text" value={address} onChange={handleAddressChange} />
                         </label>
                     </div>
-                    <div>
+                    {/* <div>
                         <label>
                             Coordonnées GPS latitude:
                             <input type="text" value={GPSLatitude} onChange={handleGPS_latitudeChange} />
@@ -113,7 +104,7 @@ function AddStep(){
                             Coordonnées GPS longitude:
                             <input type="text" value={GPSLongitude} onChange={handleGPS_longitudeChange} />
                         </label>
-                    </div>
+                    </div> */}
                     <div>
                         <label>
                             Date d'arrivée :
@@ -122,7 +113,7 @@ function AddStep(){
                     </div>
                     <div>
                         <label>
-                            Nombre de jours de séjour :
+                            Durée du séjour en jours :
                             <input type="number" value={stepDaysStay} onChange={handleStep_days_stayChange} />
                         </label>
                     </div>
@@ -137,36 +128,3 @@ function AddStep(){
 }
 
 export default AddStep;
-
-/*
-import { useEffect } from "react";
-import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import "leaflet-geosearch/dist/geosearch.css";
-import { useMap } from "react-leaflet";
-import * as L from "leaflet";
-
-const SearchField = () => {
-    console.log("SearchField");
-    const provider = new OpenStreetMapProvider();
-    const options = {
-        notFoundMessage: "No results found",
-        provider: provider,
-        style: "bar",
-        showPopup: true,
-    };
-    const searchControl = new GeoSearchControl(options);
-    const map = useMap();
-    useEffect(() => {
-        map.addControl(searchControl as L.Control);     // Add event listener for search results
-        map.on("geosearch/showlocation", (result) => {
-            console.log("Search result:", result);       // process the result here, e.g., update state, show a custom popup, etc.
-        });
-        return () => {
-            map.removeControl(searchControl as L.Control);       // Remove event listener when component unmounts
-            map.off("geosearch/showlocation");
-        };
-    }, [map, searchControl]);
-    return null; }; 
-
-export default SearchField;
-*/

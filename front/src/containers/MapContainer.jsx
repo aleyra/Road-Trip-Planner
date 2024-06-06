@@ -32,7 +32,7 @@ function MyMarker(step, indice){
                 Nom : {step.step_name} <br />
                 Adresse : {step.address} <br />
                 Date d'arrivée : {step.step_arrival_date} <br />
-                Nombre de jours de séjour : {step.step_days_stay} <br />
+                Durée du séjour en jours : {step.step_days_stay} <br />
             </Popup>
         </Marker>
     )

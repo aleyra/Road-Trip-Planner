@@ -56,6 +56,8 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * J'ai récuperé les couleurs de Wannup depuis votre site
 * J'essaie d'éviter d'utiliser des librairies le plus possible parce que les librairies qui sont gratuites pour les particuliers/étudiants ne le sont pas nécessairement pour les entreprises
 * Pour les memes raisons j'ai dessine moi-meme le marker
+* Pour passer d'une adresse a des coordonnees GPS j'ai du utiliser une API externe car leaflet-goeosearch impose d'etre place damns un enfant du container de ma map, ce qui convenait pas a mon design.
+    * J'ai decide d'utiliser OpenStreetMap car je n'ai pas vu de tarification particuliere
 * J'ai mis en place un docker compose pour pouvoir ajouter (j'espère avant la fin de temps imparti) un container avec le back, en attendant j'utilise redux
 
 ## Notes personnelles
