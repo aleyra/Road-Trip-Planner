@@ -22,6 +22,7 @@ function AddStep(){
     const [GPSLongitude, setGPSLongitude] = useState(4.844399929046631);
     const [stepArrivalDate, setStepArrivalDate] = useState("");
     const [stepDaysStay, setStepDaysStay] = useState(0);
+    // const [label, setLabel] = useState("");
 
     // const provider = new OpenStreetMapProvider();
     // const options = {
@@ -38,18 +39,6 @@ function AddStep(){
     }
 
     function handleAddressChange(e){
-        // useEffect(() => {
-        //     map.addControl(searchControl);  // Add event listener for search results
-        //     map.on("geosearch/showlocation", (result) => {
-        //         console.log("Search result:", result);  // process the result here, e.g., update state, show a custom popup, etc.
-        //     });
-        //     return () => {
-        //         map.removeControl(searchControl);   // Remove event listener when component unmounts
-        //         map.off("geosearch/showlocation");
-        //     };
-        // }, [map, searchControl]);
-        // setAddress(result.label);   // ?
-        // setGPS_coordinates([result.y, result.x]);
         setAddress(e.target.value);
     }
 
@@ -79,6 +68,23 @@ function AddStep(){
             step_days_stay: stepDaysStay,
         }));
     }
+
+    // useEffect(() => {
+    //     map.addControl(searchControl);  // Add event listener for search results
+    //     map.on("geosearch/showlocation", (result) => {
+    //         console.log("Search result:", result);  // process the result here, e.g., update state, show a custom popup, etc.
+    //         setLabel(result.label);
+    //         setGPSLatitude(result.y);
+    //         setGPSLongitude(result.x);
+    //     });
+    //     return () => {
+    //         map.removeControl(searchControl);   // Remove event listener when component unmounts
+    //         map.off("geosearch/showlocation");
+    //     };
+    // }, [map, searchControl]);
+    // console.log("label : ", label)   // ?
+    // const GPS = [GPSLatitude, GPSLongitude];
+    // console.log("GPS : ", GPS)   // ?
 
     return(
         <React.Fragment>
