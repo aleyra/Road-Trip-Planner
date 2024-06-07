@@ -7,9 +7,9 @@ function alternateColorsInString(string) {
     const words = string.split(" ");
     const coloredWords = words.map((word, index) => {
         if (index % 2 === 0) {
-            return <span className="violet">{word} </span>;
+            return <span className="violet" key={index}>{word} </span>;
         } else {
-            return <span className="orange">{word} </span>;
+            return <span className="orange" key={index}>{word} </span>;
         }
     });
     return <React.Fragment>{coloredWords}</React.Fragment>;

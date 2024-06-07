@@ -11,6 +11,9 @@ import {
     setModifyTrue,
 } from "../../redux/slices/step";
 
+// functions
+import ModifyStep from "./ModifyStepContainer";
+
 
 function DisplayOneStep(step, index, steps) {
     const dispatch = useDispatch();
@@ -62,6 +65,13 @@ function DisplayOneStep(step, index, steps) {
         day_word = "jours";
     }
 
+    if (step.to_modify === true) {
+        return (
+            <React.Fragment>
+                {ModifyStep(step, index)}
+            </React.Fragment>
+        );
+    }
     return (
         <div>
             <div className={classCSS}>
@@ -73,7 +83,10 @@ function DisplayOneStep(step, index, steps) {
                     <p>Durée du séjour : {step.step_days_stay} {day_word}</p>
                 </div>
                 <div>
-                    <button onClick={() => dispatch(setModifyTrue(step.step_name))}>Modifier</button>
+                    <button onClick={() => {
+                        dispatch(setModifyTrue(step.step_name))
+                        console.log(step.to_modify)
+                    }}>Modifier</button>
                     <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
                     {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
                 </div>

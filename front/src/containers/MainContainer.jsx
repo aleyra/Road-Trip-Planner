@@ -11,14 +11,14 @@ import HeaderContainer from "./HeaderContainer";
 function MainContainer() {
 	return (
 		<React.Fragment>
-			<div className="main-header">
+			<div className="main-header" key='header'>
 				<HeaderContainer />
 			</div>
-			<div className="main-body">
-				<div className="main-map">
+			<div className="main-body" key='body'>
+				<div className="main-map" key='map'>
 					<MyMapContainer />
 				</div>
-				<div className="main-step">
+				<div className="main-step" key='list'>
 					<StepListContainer />
 				</div>
 			</div>

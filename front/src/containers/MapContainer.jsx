@@ -21,21 +21,23 @@ const pin = new Icon({
 });
 
 function MyMarker(step, indice){
-    return (
-        <Marker
-            key={step.step_name}
-            position={step.GPS_coordinates}
-            icon={pin}
-        >
-            <Popup>
-                Etape {indice} <br />
-                Nom : {step.step_name} <br />
-                Adresse : {step.address} <br />
-                Date d'arrivée : {step.step_arrival_date} <br />
-                Durée du séjour en jours : {step.step_days_stay} <br />
-            </Popup>
-        </Marker>
-    )
+    if (step.to_modify === false){
+        return (
+            <Marker
+                key={step.step_name}
+                position={step.GPS_coordinates}
+                icon={pin}
+            >
+                <Popup>
+                    Etape {indice} <br />
+                    Nom : {step.step_name} <br />
+                    Adresse : {step.address} <br />
+                    Date d'arrivée : {step.step_arrival_date} <br />
+                    Durée du séjour en jours : {step.step_days_stay} <br />
+                </Popup>
+            </Marker>
+        );
+    }
 }
 
 

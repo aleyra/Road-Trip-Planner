@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
     step: [
@@ -8,6 +8,7 @@ const initialState = {
             step_name: 'Lyon',
             step_arrival_date: '2024-06-12',
             step_days_stay: 1,
+            to_modify: false,
         },
         {
             address: 'Paris, France',
@@ -15,6 +16,7 @@ const initialState = {
             step_name: 'Paris',
             step_arrival_date: '2024-06-13',
             step_days_stay: 3,
+            to_modify: false,
         },
         {
             address: 'Marseille, France',
@@ -22,6 +24,7 @@ const initialState = {
             step_name: 'Marseille',
             step_arrival_date: '2024-06-14',
             step_days_stay: 2,
+            to_modify: false,
         },
         {
             address: 'Nice, France',
@@ -29,6 +32,7 @@ const initialState = {
             step_name: 'Nice',
             step_arrival_date: '2024-06-16',
             step_days_stay: 1,
+            to_modify: false,
         }
     ]
 }
@@ -56,6 +60,7 @@ const stepSlice = createSlice({
             const { step_name, address, GPS_coordinates, step_arrival_date, step_days_stay } = action.payload
             const existingStep = state.step.find(step => step.step_name === step_name)
             if (existingStep) {
+                existingStep.step_name = step_name
                 existingStep.address = address
                 existingStep.GPS_coordinates = GPS_coordinates
                 existingStep.step_arrival_date = step_arrival_date
@@ -64,6 +69,13 @@ const stepSlice = createSlice({
         },
         order: (state, action) => {
             state.step = state.step.sort((a, b) => a.step_arrival_date.localeCompare(b.step_arrival_date))
+        },
+        setModifyTrue: (state, action) => {
+            const existingStep = state.step.find(step => step.step_name === action.payload)
+            if (existingStep) {
+                existingStep.to_modify = true
+                // console.log('to_modify:', current(existingStep.to_modify))
+            }
         }
     }
 })
@@ -73,6 +85,7 @@ export const {
     removeStep, 
     updateStep,
     order,
+    setModifyTrue,
 } = stepSlice.actions;
 
 export default stepSlice.reducer
