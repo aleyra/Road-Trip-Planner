@@ -67,11 +67,13 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
     * tracer le parcours entre les differentes etapes
         * ex :1 vers 2 puis 2 vers 3 ...
 * dans le container Step
-    * passer d'une adresse aux coordonnees GPS
-    * mettre en place quelque chose pour bouger une etape ?
     * mettre en place un bouton a chaque etape et un formulaire pour modifier une etape
     * mettre en place un bouton et un systeme pour exporter le road trip (sauvegarde dans le Local Storage)
         * ?
+* dans le Header (bonus)
+    * mettre un bouton pour afficher le mode d'emploi
+    * mettre une selection de langue
+    * mettre un mode sombre
 * bonus
     * Intègre une API pour obtenir des suggestions de destinations populaires.
     * Ajoute des fonctionnalités de partage de l'itinéraire via un lien unique.
