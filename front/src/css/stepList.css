@@ -67,6 +67,19 @@
   border: 3px solid red;
 }
 
+.step-one-modify {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: center;
+  background-color: lightgray;
+  padding: 10px;
+  margin-top: 10px;
+  height: 100%;
+  border-radius: 10px;
+  border: 3px solid orange;
+}
+
 .step-add {
   display: flex;
   flex-direction: column;

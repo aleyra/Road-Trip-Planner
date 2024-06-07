@@ -88,18 +88,6 @@ function AddStep(){
                             <input type="text" value={address} onChange={handleAddressChange} />
                         </label>
                     </div>
-                    {/* <div>
-                        <label>
-                            Coordonnées GPS latitude:
-                            <input type="text" value={GPSLatitude} onChange={handleGPS_latitudeChange} />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Coordonnées GPS longitude:
-                            <input type="text" value={GPSLongitude} onChange={handleGPS_longitudeChange} />
-                        </label>
-                    </div> */}
                     <div>
                         <label>
                             Date d'arrivée :
