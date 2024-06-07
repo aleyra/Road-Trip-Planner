@@ -8,6 +8,7 @@ import './../../css/stepList.css';
 import {
     removeStep,
     updateStep,
+    setModifyTrue,
 } from "../../redux/slices/step";
 
 
@@ -22,6 +23,7 @@ function DisplayOneStep(step, index, steps) {
     const current_step_days_stay = current_step.step_days_stay;
     const current_step_departure_date = new Date(current_step_arrival_date);
     current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
+    
     if (index !== 0){
         const previous_step = steps[index - 1];
         const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
@@ -55,9 +57,9 @@ function DisplayOneStep(step, index, steps) {
     const year = arrival_date.getFullYear();
     const txt_arrival_date = `${day.toString().padStart(2, "0")}/${month.toString().padStart(2,"0")}/${year.toString()}`;
     
-    let word = "jour";
+    let day_word = "jour";
     if (step.step_days_stay > 1) {
-        word = "jours";
+        day_word = "jours";
     }
 
     return (
@@ -68,10 +70,10 @@ function DisplayOneStep(step, index, steps) {
                     <p>Nom : {step.step_name}</p>
                     <p>Adresse : {step.address}</p>
                     <p>Date d'arrivée : {txt_arrival_date}</p>
-                    <p>Durée du séjour : {step.step_days_stay} {word}</p>
+                    <p>Durée du séjour : {step.step_days_stay} {day_word}</p>
                 </div>
                 <div>
-                    <button onClick={() => dispatch(updateStep(step.step_name))}>Modifier</button>
+                    <button onClick={() => dispatch(setModifyTrue(step.step_name))}>Modifier</button>
                     <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
                     {/* <button onClick={() => dispatch(exchangeStep(step.step_name))}>Echanger</button> */}
                 </div>
