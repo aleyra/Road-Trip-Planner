@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     MapContainer,
@@ -53,7 +53,6 @@ function MyMapContainer() {
             <MapContainer 
                 center={[45.75934600830078, 4.844399929046631]}
                 zoom={20}
-                // scrollWheelZoom={false}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

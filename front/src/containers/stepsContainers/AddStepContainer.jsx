@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 //css
@@ -14,8 +14,6 @@ function AddStep(){
     const dispatch = useDispatch();
     const [stepName, setStepName] = useState("");
     const [address, setAddress] = useState("");
-    const [GPSLatitude, setGPSLatitude] = useState(null);
-    const [GPSLongitude, setGPSLongitude] = useState(null);
     const [stepArrivalDate, setStepArrivalDate] = useState("");
     const [stepDaysStay, setStepDaysStay] = useState(0);
 
@@ -26,13 +24,6 @@ function AddStep(){
     function handleAddressChange(e){
         setAddress(e.target.value);
     }
-
-    // function handleGPS_latitudeChange(e){
-    //     setGPSLatitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
-    // }
-    // function handleGPS_longitudeChange(e){
-    //     setGPSLongitude(e.target.value); //trouver comment passer de l'adresse aux coordonnees GPS
-    // }
 
     function handleStep_arrival_dateChange(e){
         setStepArrivalDate(e.target.value);
@@ -45,6 +36,7 @@ function AddStep(){
     async function handleSubmit(e){
         e.preventDefault();
         const encodedAddress = encodeURIComponent(address);
+        console.log(`Adresse encodée: ${encodedAddress}`);
         const url = `https://nominatim.openstreetmap.org/search?q=${encodedAddress}&format=json&addressdetails=1&limit=1`;
  
         try {
@@ -52,9 +44,20 @@ function AddStep(){
             if (response.data.length > 0) {
                 const location = response.data[0];
                 if (location.lat && location.lon) {
-                    console.log(`Latitude: ${location.lat}, Longitude: ${location.lon}`);
-                    setGPSLatitude(location.lat);
-                    setGPSLongitude(location.lon);
+                    dispatch(addStep({
+                        address, 
+                        GPS_coordinates: [location.lat, location.lon],
+                        step_name: stepName, 
+                        step_arrival_date: stepArrivalDate, 
+                        step_days_stay: stepDaysStay,
+                    }));
+                    console.log('Etape ajoutée:', {
+                        address, 
+                        GPS_coordinates: [location.lat, location.lon],
+                        step_name: stepName, 
+                        step_arrival_date: stepArrivalDate, 
+                        step_days_stay: stepDaysStay,
+                    });
                 } else {
                     console.error('Coordonnées GPS non disponibles.');
                     alert('Coordonnées GPS non disponibles pour cette adresse.');
@@ -67,14 +70,6 @@ function AddStep(){
             console.error('Erreur lors de la récupération des coordonnées:', error);
             alert('Erreur lors de la récupération des coordonnées.');
         }
-        const GPS_coordinates = [GPSLatitude, GPSLongitude];
-        dispatch(addStep({
-            address, 
-            GPS_coordinates, 
-            step_name: stepName, 
-            step_arrival_date: stepArrivalDate, 
-            step_days_stay: stepDaysStay,
-        }));
     }
 
     return(

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 //css
 import './../../css/stepList.css';
@@ -8,7 +8,6 @@ import './../../css/stepList.css';
 import {
     removeStep,
     updateStep,
-    exchangeStep,
 } from "../../redux/slices/step";
 
 
@@ -23,7 +22,7 @@ function DisplayOneStep(step, index, steps) {
     const current_step_days_stay = current_step.step_days_stay;
     const current_step_departure_date = new Date(current_step_arrival_date);
     current_step_departure_date.setDate(current_step_departure_date.getDate() + current_step_days_stay);
-    if (index != 0){
+    if (index !== 0){
         const previous_step = steps[index - 1];
         const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
         const previous_step_departure_date = new Date(previous_step_arrival_date);
@@ -32,7 +31,7 @@ function DisplayOneStep(step, index, steps) {
             hasError = true;
         }
     }
-    if (index != steps.length - 1){
+    if (index !== steps.length - 1){
         const next_step = steps[index + 1];
         const next_step_arrival_date = new Date(next_step.step_arrival_date);
         if (current_step_departure_date > next_step_arrival_date) {
@@ -43,7 +42,7 @@ function DisplayOneStep(step, index, steps) {
     let classCSS = "step-one-ok";
     let error_msg = "*Le sejour se chevauche avec l'étape précédente ou suivante"
 
-    if (hasError == true) {
+    if (hasError === true) {
         classCSS = "step-one-nok";
     } else {
         error_msg = "";
