@@ -6,13 +6,13 @@ import './../css/main.css';
 //functions
 import MyMapContainer from "./MapContainer";
 import StepListContainer from "./stepsContainers/StepListContainer";
+import HeaderContainer from "./HeaderContainer";
 
 function MainContainer() {
 	return (
 		<React.Fragment>
 			<div className="main-header">
-				<h1>Road Trip Planner</h1>
-				<p>page header TODO</p>
+				<HeaderContainer />
 			</div>
 			<div className="main-body">
 				<div className="main-map">

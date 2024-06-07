@@ -1,0 +1,14 @@
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .orange {
+    color: var(--logo-wannup-orange); /* Couleur principale du logo Wannup */
+  }
+  
+  .violet {
+    color: var(--logo-wannup-violet); /* Couleur secondaire du logo Wannup */
+  }
