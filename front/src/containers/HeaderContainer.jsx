@@ -4,7 +4,6 @@ import React from "react";
 import './../css/header.css';
 
 function alternateColorsInString(string) {
-    let newString = "";
     const words = string.split(" ");
     const coloredWords = words.map((word, index) => {
         if (index % 2 === 0) {
