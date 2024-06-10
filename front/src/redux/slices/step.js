@@ -44,15 +44,6 @@ const stepSlice = createSlice({
         addStep: (state, action) => {
             state.step.push(action.payload)
         },
-        exchangeStep: (state, action) => {
-            const { step_name1, step_name2 } = action.payload
-            const step1 = state.step.find(step => step.step_name === step_name1)
-            const step2 = state.step.find(step => step.step_name === step_name2)
-            const index1 = state.step.indexOf(step1)
-            const index2 = state.step.indexOf(step2)
-            state.step[index1] = step2
-            state.step[index2] = step1
-        },
         removeStep: (state, action) => {
             state.step = state.step.filter(step => step.step_name !== action.payload)
         },
@@ -65,6 +56,7 @@ const stepSlice = createSlice({
                 existingStep.GPS_coordinates = GPS_coordinates
                 existingStep.step_arrival_date = step_arrival_date
                 existingStep.step_days_stay = step_days_stay
+                existingStep.to_modify = false
             }
         },
         order: (state, action) => {
