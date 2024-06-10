@@ -16,7 +16,6 @@ function DisplayOneStep({step, index, steps}) {
 
     let hasError = false;
 
-    console.log('step:', step);
     // prepare var to check overlapping with next and previous steps
     const current_step = step;
     const current_step_arrival_date = new Date(current_step.step_arrival_date);
@@ -26,8 +25,6 @@ function DisplayOneStep({step, index, steps}) {
         const previous_step_arrival_date = new Date(previous_step.step_arrival_date);
         const previous_step_departure_date = new Date(previous_step_arrival_date);
         previous_step_departure_date.setDate(previous_step_departure_date.getDate() + previous_step.step_days_stay);
-        console.log('previous_step_departure_date:', previous_step_departure_date);
-        console.log('current_step_arrival_date:', current_step_arrival_date);
         if (previous_step_departure_date > current_step_arrival_date) {
             hasError = true;
         }
@@ -37,8 +34,6 @@ function DisplayOneStep({step, index, steps}) {
     if (index !== steps.length - 1){
         const next_step = steps[index + 1];
         const next_step_arrival_date = new Date(next_step.step_arrival_date);
-        console.log('current_step_departure_date:', current_step_departure_date);
-        console.log('next_step_arrival_date:', next_step_arrival_date);
         if (current_step_departure_date > next_step_arrival_date) {
             hasError = true;
         }

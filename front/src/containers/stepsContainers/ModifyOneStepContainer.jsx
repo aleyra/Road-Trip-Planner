@@ -36,7 +36,6 @@ function ModifyOneStep({step, index}){
     async function handleSubmit(e){
         e.preventDefault();
         const encodedAddress = encodeURIComponent(address);
-        console.log(`Adresse encodée: ${encodedAddress}`);
         const url = `https://nominatim.openstreetmap.org/search?q=${encodedAddress}&format=json&addressdetails=1&limit=1`;
  
         try {
@@ -51,13 +50,6 @@ function ModifyOneStep({step, index}){
                         step_arrival_date: stepArrivalDate, 
                         step_days_stay: stepDaysStay,
                     }));
-                    console.log('Etape modifiee:', {
-                        address, 
-                        GPS_coordinates: [location.lat, location.lon],
-                        step_name: stepName, 
-                        step_arrival_date: stepArrivalDate, 
-                        step_days_stay: stepDaysStay,
-                    });
                 } else {
                     console.error('Coordonnées GPS non disponibles.');
                     alert('Coordonnées GPS non disponibles pour cette adresse.');

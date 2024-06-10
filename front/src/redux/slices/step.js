@@ -66,7 +66,6 @@ const stepSlice = createSlice({
             const existingStep = state.step.find(step => step.step_name === action.payload)
             if (existingStep) {
                 existingStep.to_modify = true
-                // console.log('to_modify:', current(existingStep.to_modify))
             }
         }
     }
