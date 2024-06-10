@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     MapContainer,
@@ -21,23 +21,21 @@ const pin = new Icon({
 });
 
 function MyMarker(step, indice){
-    if (step.to_modify === false){
-        return (
-            <Marker
-                key={step.step_name}
-                position={step.GPS_coordinates}
-                icon={pin}
-            >
-                <Popup>
-                    Etape {indice} <br />
-                    Nom : {step.step_name} <br />
-                    Adresse : {step.address} <br />
-                    Date d'arrivée : {step.step_arrival_date} <br />
-                    Durée du séjour en jours : {step.step_days_stay} <br />
-                </Popup>
-            </Marker>
-        );
-    }
+    return (
+        <Marker
+            key={step.step_name}
+            position={step.GPS_coordinates}
+            icon={pin}
+        >
+            <Popup>
+                Etape {indice} <br />
+                Nom : {step.step_name} <br />
+                Adresse : {step.address} <br />
+                Date d'arrivée : {step.step_arrival_date} <br />
+                Durée du séjour en jours : {step.step_days_stay} <br />
+            </Popup>
+        </Marker>
+    );
 }
 
 
@@ -47,7 +45,11 @@ function MyMapContainer() {
     const dispatch = useDispatch();
     const steps = useSelector((state) => state.steps.step);
 
-    dispatch(order());
+    useEffect(() => {
+        dispatch(order());
+    }, [dispatch]);
+
+    let i = 0;
 
     return (
         <React.Fragment>
@@ -69,8 +71,8 @@ function MyMapContainer() {
                         A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker> */}
-                {steps.map((step, i = 0) => (
-                    MyMarker(step, i + 1)
+                {steps.map((step,) => (
+                    MyMarker(step, ++i)
                 ))}
             </MapContainer>
         </React.Fragment>

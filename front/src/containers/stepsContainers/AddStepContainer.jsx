@@ -8,6 +8,7 @@ import './../../css/stepList.css';
 //reduc actions
 import {
     addStep,
+    order,
 } from "../../redux/slices/step";
 
 function AddStep(){
@@ -45,11 +46,13 @@ function AddStep(){
                 if (location.lat && location.lon) {
                     dispatch(addStep({
                         address, 
-                        GPS_coordinates: [location.lat, location.lon],
+                        GPS_coordinates: [Number(location.lat), Number(location.lon)],
                         step_name: stepName, 
                         step_arrival_date: stepArrivalDate, 
-                        step_days_stay: stepDaysStay,
+                        step_days_stay: Number(stepDaysStay),
+                        to_modify: false,
                     }));
+                    dispatch(order());
                 } else {
                     console.error('Coordonnées GPS non disponibles.');
                     alert('Coordonnées GPS non disponibles pour cette adresse.');

@@ -8,6 +8,7 @@ import './../../css/stepList.css';
 //reduc actions
 import {
     updateStep,
+    order,
 } from "../../redux/slices/step";
 
 function ModifyOneStep({step, index}){
@@ -50,6 +51,7 @@ function ModifyOneStep({step, index}){
                         step_arrival_date: stepArrivalDate, 
                         step_days_stay: stepDaysStay,
                     }));
+                    dispatch(order());
                 } else {
                     console.error('Coordonnées GPS non disponibles.');
                     alert('Coordonnées GPS non disponibles pour cette adresse.');
