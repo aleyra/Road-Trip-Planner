@@ -7,6 +7,7 @@ import './../css/main.css';
 import MyMapContainer from "./MapContainer";
 import StepListContainer from "./stepsContainers/StepListContainer";
 import HeaderContainer from "./HeaderContainer";
+import { useSelector } from "react-redux";
 
 function MainContainer() {
 	return (

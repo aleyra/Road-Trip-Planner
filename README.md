@@ -66,9 +66,6 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
     * gerer le zoom et l'affichage pour voir d'un coup toutes les etapes
     * tracer le parcours entre les differentes etapes
         * ex :1 vers 2 puis 2 vers 3 ...
-* dans le container Step
-    * mettre en place un bouton et un systeme pour exporter le road trip (sauvegarde dans le Local Storage)
-        * ?
 * bonus perso
     * dans le container Map
         * dans le popup de la carte, mettre un bouton supprimer et un bouton modifier
