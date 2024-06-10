@@ -2,10 +2,9 @@ FROM node:20
 
 WORKDIR /app
 
-COPY ./ /app/
+COPY package.json package-lock.json ./
 
-RUN ls -la
-
+RUN npm install
 RUN npm install
 
 EXPOSE 3000

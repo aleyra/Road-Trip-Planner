@@ -9,7 +9,6 @@
   border: 3px solid var(--bg-wannup-violet);
   border-radius: 10px;
   background-color: darkgray;
-  height: 100%;
 }
 
 .step-list {
@@ -20,7 +19,7 @@
   margin: 10px;
   border: 3px solid darkgray;
   border-radius: 10px;
-  height: 100%;
+  height: 100%
 }
 
 .step-number {
