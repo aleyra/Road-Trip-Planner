@@ -5,7 +5,9 @@ import {
     TileLayer,
     Marker,
     Popup,
+    useMap,
 } from 'react-leaflet'
+import { latLngBounds } from 'leaflet';
 
 //css
 import './../../css/map.css';
@@ -37,6 +39,27 @@ function MyMarker(step, indice){
     );
 }
 
+function FitBounds({ steps }) {
+    const map = useMap();
+
+    useEffect(() => {
+        if (steps.length > 0) {
+            const maxLat = Math.max(...steps.map(step => step.GPS_coordinates[0]));
+            const minLat = Math.min(...steps.map(step => step.GPS_coordinates[0]));
+            const maxLng = Math.max(...steps.map(step => step.GPS_coordinates[1]));
+            const minLng = Math.min(...steps.map(step => step.GPS_coordinates[1]));
+
+            const bounds = [
+                [maxLat, minLng],
+                [minLat, maxLng]
+            ];
+
+            map.fitBounds(bounds);
+        }
+    }, [steps, map]);
+
+    return null;
+}
 
 
 function MyMapContainer() {
@@ -54,8 +77,9 @@ function MyMapContainer() {
         <React.Fragment>
 
             <MapContainer 
-                center={[45.75934600830078, 4.844399929046631]}
-                zoom={20}
+                center={[45.75934600830078, 4.844399929046631]} //default center
+                zoom={20} //default zoom
+                // bounds={bounds}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -64,7 +88,15 @@ function MyMapContainer() {
                 {steps.map((step,) => (
                     MyMarker(step, ++i)
                 ))}
-                <RoutingMachine />
+                {steps.map((step) => (
+                    <RoutingMachine
+                        key={step.step_name}
+                        step={step}
+                        index={steps.indexOf(step)}
+                        steps={steps}
+                    />
+                ))}
+                <FitBounds steps={steps} />
             </MapContainer>
         </React.Fragment>
     );
