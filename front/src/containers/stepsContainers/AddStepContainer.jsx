@@ -31,7 +31,11 @@ function AddStep(){
     }
 
     function handleStep_days_stayChange(e){
-        setStepDaysStay(e.target.value);
+        if (e.target.value < 0) {
+            setStepDaysStay(0);
+        } else {
+            setStepDaysStay(e.target.value);
+        }
     }
 
     async function handleSubmit(e){
@@ -92,7 +96,7 @@ function AddStep(){
                     <div>
                         <label>
                             Durée du séjour en jours :
-                            <input type="number" value={stepDaysStay} onChange={handleStep_days_stayChange} />
+                            <input type="number" min="0" value={stepDaysStay} onChange={handleStep_days_stayChange} />
                         </label>
                     </div>
                     <div>

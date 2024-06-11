@@ -92,7 +92,7 @@ function ModifyOneStep({step, index}){
                     <div>
                         <label>
                             Durée du séjour en jours :
-                            <input type="number" value={stepDaysStay} onChange={handleStep_days_stayChange} />
+                            <input type="number" min="0" value={stepDaysStay} onChange={handleStep_days_stayChange} />
                         </label>
                     </div>
                     <div>
