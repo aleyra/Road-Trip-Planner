@@ -9,5 +9,5 @@
 
 .leaflet-routing-container,
 .leaflet-routing-alternatives-container {
-    display: none !important;
+    display: none !important; /* hide the course description */
 }
