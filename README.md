@@ -62,9 +62,6 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 
 ## Notes personnelles
 ### TODO
-* dans le container Map
-    * gerer le zoom et l'affichage pour voir d'un coup toutes les etapes
-* revoir les modif
 * bonus perso
     * dans le container Map
         * dans le popup de la carte, mettre un bouton supprimer et un bouton modifier
