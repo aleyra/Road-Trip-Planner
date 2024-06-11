@@ -48,8 +48,8 @@ const stepSlice = createSlice({
             state.step = state.step.filter(step => step.step_name !== action.payload)
         },
         updateStep: (state, action) => {
-            const { step_name, address, GPS_coordinates, step_arrival_date, step_days_stay } = action.payload
-            const existingStep = state.step.find(step => step.step_name === step_name)
+            const { old_name, step_name, address, GPS_coordinates, step_arrival_date, step_days_stay } = action.payload
+            const existingStep = state.step.find(step => step.step_name === old_name)
             if (existingStep) {
                 existingStep.step_name = step_name
                 existingStep.address = address

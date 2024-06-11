@@ -48,6 +48,7 @@ function ModifyOneStep({step, index}){
                 const location = response.data[0];
                 if (location.lat && location.lon) {
                     dispatch(updateStep({
+                        old_name: step.step_name,
                         address, 
                         GPS_coordinates: [location.lat, location.lon],
                         step_name: stepName, 
