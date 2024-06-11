@@ -59,6 +59,8 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * Pour passer d'une adresse a des coordonnees GPS j'ai du utiliser une API externe car leaflet-goeosearch impose d'etre place damns un enfant du container de ma map, ce qui convenait pas a mon design.
     * J'ai decide d'utiliser OpenStreetMap car je n'ai pas vu de tarification particuliere
 * J'ai mis en place un docker compose pour pouvoir ajouter (j'espère avant la fin de temps imparti) un container avec le back, en attendant j'utilise redux
+    * update (11/06/2024) : il me reste un peu plus d'un jour, je prefere m'attaquer aux bonus qu'essayer de mettre un back sachant que je n'ai aucune reelle experience la dedans
+* Pour les destinations populaire je vais utiliser l'API de tripAdvisor, elle est gratuite tant qu'on ne depasse pas les 5000 requetes/mois. Je n'ai pas trouve mieux
 
 ## Notes personnelles
 ### TODO
@@ -90,6 +92,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * [leaflet-geosearch](https://smeijer.github.io/leaflet-geosearch/#installation)
 * [itineraire](http://www.liedman.net/leaflet-routing-machine/)
 * [itineraire](https://stackoverflow.com/questions/67658340/how-to-use-leaflet-routing-machine-with-react-leaflet-3)
+* [API TripAdvisor](https://www.tripadvisor.com/developers)
 
 ## Notes from GitLab
 ### Getting started
