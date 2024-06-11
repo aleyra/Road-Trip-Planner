@@ -83,6 +83,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 
 ### Notes
 * mettre l'img du pin dans `/front/public/`
+* il a fallu bidouiller le css pour degager la description de l'itineraire
 
 ### Liens utiles
 * [react-leaflet.js](https://react-leaflet.js.org/docs/start-installation/)
