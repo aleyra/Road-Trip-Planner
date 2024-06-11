@@ -91,7 +91,8 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * [react-redux toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 * [afficher la date en dd/mm/yyyy](https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object)
 * [leaflet-geosearch](https://smeijer.github.io/leaflet-geosearch/#installation)
-
+* [itineraire](http://www.liedman.net/leaflet-routing-machine/)
+* [itineraire](https://stackoverflow.com/questions/67658340/how-to-use-leaflet-routing-machine-with-react-leaflet-3)
 
 ## Notes from GitLab
 ### Getting started

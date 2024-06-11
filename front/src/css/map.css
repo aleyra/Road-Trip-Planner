@@ -3,3 +3,11 @@
     height: 90vh;
     border-radius: 25px;
 }
+
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
+.leaflet-routing-container,
+.leaflet-routing-alternatives-container {
+    display: none !important;
+}

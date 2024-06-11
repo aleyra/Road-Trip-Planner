@@ -4,7 +4,7 @@ import React from "react";
 import './../css/main.css';
 
 //functions
-import MyMapContainer from "./MapContainer";
+import MyMapContainer from "./mapContainers/MapContainer";
 import StepListContainer from "./stepsContainers/StepListContainer";
 import HeaderContainer from "./HeaderContainer";
 import { useSelector } from "react-redux";

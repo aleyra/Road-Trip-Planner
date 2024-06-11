@@ -4,28 +4,27 @@ import {
     MapContainer,
     TileLayer,
     Marker,
-    Popup
+    Popup,
 } from 'react-leaflet'
-import { Icon } from "leaflet";
 
 //css
-import './../css/map.css';
-import 'leaflet/dist/leaflet.css';
+import './../../css/map.css';
 
 //redux actions
-import { order } from "../redux/slices/step";
+import { order } from "../../redux/slices/step";
 
-const pin = new Icon({
-    iconUrl: "/pin.png",
-    iconSize: [50, 50]
-});
+//functions
+import RoutingMachine from "./RoutingMachineContainer";
+
+//const
+import { PIN } from "../../const/pinIcons";
 
 function MyMarker(step, indice){
     return (
         <Marker
             key={step.step_name}
             position={step.GPS_coordinates}
-            icon={pin}
+            icon={PIN}
         >
             <Popup>
                 Etape {indice} <br />
@@ -62,18 +61,10 @@ function MyMapContainer() {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {/* <Marker
-                    key='WannUp'
-                    position={[45.75934600830078, 4.844399929046631]}
-                    icon={pin}
-                >
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker> */}
                 {steps.map((step,) => (
                     MyMarker(step, ++i)
                 ))}
+                <RoutingMachine />
             </MapContainer>
         </React.Fragment>
     );
