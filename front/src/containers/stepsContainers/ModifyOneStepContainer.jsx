@@ -31,6 +31,9 @@ function ModifyOneStep({step, index}){
     }
 
     function handleStep_days_stayChange(e){
+        if (e.target.value < 0) {
+            e.target.value = 0;
+        }
         setStepDaysStay(e.target.value);
     }
 
