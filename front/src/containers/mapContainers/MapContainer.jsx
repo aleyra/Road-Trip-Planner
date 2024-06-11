@@ -21,6 +21,7 @@ import RoutingMachine from "./RoutingMachineContainer";
 //const
 import { PIN } from "../../const/pinIcons";
 
+
 function MyMarker(step, indice){
     return (
         <Marker
@@ -39,6 +40,7 @@ function MyMarker(step, indice){
     );
 }
 
+
 function FitBounds({ steps }) {
     const map = useMap();
 
@@ -49,10 +51,11 @@ function FitBounds({ steps }) {
             const maxLng = Math.max(...steps.map(step => step.GPS_coordinates[1]));
             const minLng = Math.min(...steps.map(step => step.GPS_coordinates[1]));
 
-            const bounds = [
-                [maxLat, minLng],
-                [minLat, maxLng]
-            ];
+            const bounds = new latLngBounds([
+                [minLat, minLng],
+                [maxLat, maxLng],
+            ]);
+            console.log(bounds);
 
             map.fitBounds(bounds);
         }
