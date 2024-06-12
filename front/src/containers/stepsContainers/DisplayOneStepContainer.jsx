@@ -71,8 +71,8 @@ function DisplayOneStep({step, index, steps}) {
                     <p>Durée du séjour : {step.step_days_stay} {word}</p>
                 </div>
                 <div>
-                    <button onClick={() => dispatch(setModifyTrue(step.step_name))}>Modifier</button>
-                    <button onClick={() => dispatch(removeStep(step.step_name))}>Supprimer</button>
+                    <button onClick={() => dispatch(setModifyTrue(step.id))}>Modifier</button>
+                    <button onClick={() => dispatch(removeStep(step.id))}>Supprimer</button>
                 </div>
             </div>
             <div className="error">{error_msg}</div>

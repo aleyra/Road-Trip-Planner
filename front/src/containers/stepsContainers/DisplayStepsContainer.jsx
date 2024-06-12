@@ -19,6 +19,8 @@ function DisplaySteps() {
         dispatch(order());
     }, [dispatch]);
 
+    console.log(steps);
+
     return (
         <React.Fragment>
             <h2>Liste des étapes</h2>

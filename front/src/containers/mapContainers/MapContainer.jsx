@@ -55,7 +55,6 @@ function FitBounds({ steps }) {
                 [minLat, minLng],
                 [maxLat, maxLng],
             ]);
-            console.log(bounds);
 
             map.fitBounds(bounds);
         }

@@ -2,7 +2,10 @@ import L from "leaflet";
 import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
 
-import { WANNUP_ORANGE } from "../../const/colors";
+import { 
+    WANNUP_ORANGE,
+    WANNUP_VIOLET
+} from "../../const/colors";
 
 const createRoutineMachineLayer = ({step, index, steps}) => {
 
@@ -21,7 +24,7 @@ const createRoutineMachineLayer = ({step, index, steps}) => {
         L.latLng(next_GPS_coordinates[0], next_GPS_coordinates[1])
         ],
         lineOptions: {
-            styles: [{ color: WANNUP_ORANGE, weight: 4 }]
+            styles: [{ color: WANNUP_VIOLET, weight: 4 }]
         },
         createMarker: function() { return null; }, // Disable markers creation
         show: false, // Disable the default instructions panel
