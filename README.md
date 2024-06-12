@@ -52,6 +52,9 @@ Merci de bien vouloir nous faire parvenir ton projet dans un délai de deux sema
 ## Comment lancer le projet
 A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 
+## Video de demonstration
+[Youtube](https://youtu.be/tfi0edrOZkM)
+
 ## Notes a l'intention des observateurs de chez Wannup
 * J'ai récuperé les couleurs de Wannup depuis votre site
 * J'essaie d'éviter d'utiliser des librairies le plus possible parce que les librairies qui sont gratuites pour les particuliers/étudiants ne le sont pas nécessairement pour les entreprises
@@ -70,7 +73,6 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
         * mettre le geosearch pour obtenir une adresse a partir d'un nom de lieu
             * ajouter une option pour ajouter le resultat en etape
     * dans le Header
-        * mettre un bouton pour afficher le mode d'emploi
         * mettre une selection de langue
 * bonus
     * Intègre une API pour obtenir des suggestions de destinations populaires.
