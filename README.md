@@ -72,7 +72,6 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
     * dans le Header
         * mettre un bouton pour afficher le mode d'emploi
         * mettre une selection de langue
-        * mettre un mode sombre
 * bonus
     * Intègre une API pour obtenir des suggestions de destinations populaires.
     * Ajoute des fonctionnalités de partage de l'itinéraire via un lien unique.
@@ -93,7 +92,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * [itineraire](http://www.liedman.net/leaflet-routing-machine/)
 * [itineraire](https://stackoverflow.com/questions/67658340/how-to-use-leaflet-routing-machine-with-react-leaflet-3)
 * [API TripAdvisor](https://www.tripadvisor.com/developers)
-* [interrupteur HTML](https://geekcommunicant.com/blog/2023/04/07/creer-un-interrupteur-en-css/)
+* [interrupteur HTML](https://www.w3schools.com/howto/howto_css_switch.asp)
 
 ## Notes from GitLab
 ### Getting started

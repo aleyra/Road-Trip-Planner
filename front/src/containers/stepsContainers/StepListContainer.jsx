@@ -18,7 +18,7 @@ function StepListContainer() {
                     <DisplaySteps />
                 </div>
                 <div className="step-add">
-                    <h2>Add Step</h2>
+                    <h2>Ajouter une étape</h2>
                     <AddStep />
                 </div>
             </div>

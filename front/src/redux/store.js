@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 //slices
 import stepSlice from './slices/step';
 import modeSlice from './slices/mode';
+import helpSlice from './slices/help';
 
 import { loadFromLocalStorage, saveToLocalStorage } from './localStorage';
 
@@ -11,7 +12,8 @@ const preloadedState = loadFromLocalStorage();
 const store = configureStore({
     reducer: {
         steps: stepSlice,
-        mode: modeSlice
+        mode: modeSlice,
+        help: helpSlice,
     },
     preloadedState,
 })

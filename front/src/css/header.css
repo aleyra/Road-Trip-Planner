@@ -14,6 +14,16 @@
   color: var(--logo-wannup-violet); /* Couleur secondaire du logo Wannup */
 }
 
+.orange-dark {
+  color: var(--logo-wannup-orange); /* Couleur principale du logo Wannup */
+  background-color: var(--logo-wannup-violet); /* Couleur de fond sombre */
+}
+
+.violet-dark {
+  color: var(--logo-wannup-violet); /* Couleur secondaire du logo Wannup */
+  background-color: var(--logo-wannup-orange); /* Couleur de fond sombre */
+}
+
 .switch-div {
   position: fixed;
   top: 20px;
@@ -86,4 +96,47 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* Styles for the help checkbox */
+.help-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.help-switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-left: 10px;
+}
+
+.help-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.help-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #007BFF;
+  color: white;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  border-radius: 50%;
+  transition: 0.4s;
+  width: 34px;
+  height: 34px;
+}
+
+.help-switch input:checked + .help-checkmark {
+  background-color: #ccc;
+  color: black;
 }

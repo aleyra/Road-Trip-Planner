@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //css
@@ -6,14 +6,29 @@ import './../css/header.css';
 
 //redux actions
 import { changeMode } from "../redux/slices/mode";
+import { toggleHelp } from "../redux/slices/help";
 
-function alternateColorsInString(string) {
+function AlternateColorsInString(string) {
+    const mode = useSelector((state) => state.mode.mode);
+    const [cssViolet, setCssViolet] = React.useState('violet');
+    const [cssOrange, setCssOrange] = React.useState('orange');
+
+    useEffect(() => {
+        if (mode !== 'white') {
+            setCssViolet('violet-dark');
+            setCssOrange('orange-dark');
+        } else {
+            setCssViolet('violet');
+            setCssOrange('orange');
+        }
+    }, [mode]);
+
     const words = string.split(" ");
     const coloredWords = words.map((word, index) => {
         if (index % 2 === 0) {
-            return <span className="violet" key={index}>{word} </span>;
+            return <span className={cssViolet} key={index}>{word} </span>;
         } else {
-            return <span className="orange" key={index}>{word} </span>;
+            return <span className={cssOrange} key={index}>{word} </span>;
         }
     });
     return <React.Fragment>{coloredWords}</React.Fragment>;
@@ -40,8 +55,14 @@ function HeaderContainer() {
                 </label>
             </div>
             <h1 className="title">
-                {alternateColorsInString("Planification de Road Trip")}
+                {AlternateColorsInString("Planification de Road Trip")}
             </h1>
+            <div className="help-checkbox">
+                <label class="help-switch">
+                    <input type="checkbox" onClick={() => dispatch(toggleHelp())} />
+                    <span class="help-checkmark">?</span>
+                </label>
+            </div>
         </React.Fragment>
     );
 }
