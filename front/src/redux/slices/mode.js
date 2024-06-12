@@ -9,9 +9,15 @@ const modeSlice = createSlice({
     initialState: initialState,
     reducers: {
         changeMode: (state, action) => {
-            state.mode = action.payload
+            if (state.mode === 'white') {
+                state.mode = 'dark'
+            } else {
+                state.mode = 'white'
+            }
         }
     }
 })
 
 export const { changeMode } = modeSlice.actions
+
+export default modeSlice.reducer

@@ -93,6 +93,7 @@ A la racine du projet, dans un terminal entrer la commande ``docker compose up``
 * [itineraire](http://www.liedman.net/leaflet-routing-machine/)
 * [itineraire](https://stackoverflow.com/questions/67658340/how-to-use-leaflet-routing-machine-with-react-leaflet-3)
 * [API TripAdvisor](https://www.tripadvisor.com/developers)
+* [interrupteur HTML](https://geekcommunicant.com/blog/2023/04/07/creer-un-interrupteur-en-css/)
 
 ## Notes from GitLab
 ### Getting started

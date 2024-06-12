@@ -7,9 +7,9 @@ import './../css/main.css';
 import MyMapContainer from "./mapContainers/MapContainer";
 import StepListContainer from "./stepsContainers/StepListContainer";
 import HeaderContainer from "./HeaderContainer";
-import { useSelector } from "react-redux";
 
 function MainContainer() {
+
 	return (
 		<React.Fragment>
 			<div className="main-header" key='header'>

@@ -9,6 +9,7 @@
   border: 3px solid var(--bg-wannup-violet);
   border-radius: 10px;
   background-color: darkgray;
+  color: black;
 }
 
 .step-list {
