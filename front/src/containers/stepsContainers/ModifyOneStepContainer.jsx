@@ -37,8 +37,23 @@ function ModifyOneStep({step, index}){
         setStepDaysStay(e.target.value);
     }
 
+    function isValidDate(dateString) {
+        const regEx = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateString.match(regEx)) return false;  // Invalid format
+        const date = new Date(dateString);
+        const timestamp = date.getTime();
+        if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) return false;  // Invalid date
+        return dateString === date.toISOString().split('T')[0];
+    }
+
     async function handleSubmit(e){
         e.preventDefault();
+
+        if (!isValidDate(stepArrivalDate)) {
+            alert('La date d\'arrivée n\'est pas valide.');
+            return;
+        }
+
         const encodedAddress = encodeURIComponent(address);
         const url = `https://nominatim.openstreetmap.org/search?q=${encodedAddress}&format=json&addressdetails=1&limit=1`;
  
